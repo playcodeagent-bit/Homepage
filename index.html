@@ -447,11 +447,145 @@
         .footer-link {
             color: #9aa0a6;
             text-decoration: none;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .footer-link:hover {
             color: white;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .footer-link i {
+            font-size: 0.9rem;
+        }
+
+        /* Email Modal Styles */
+        .email-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .email-modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: modalSlideIn 0.3s ease;
+            position: relative;
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--medium-gray);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: var(--google-red);
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--dark-gray);
+            text-align: center;
+        }
+
+        .modal-subtitle {
+            color: var(--medium-gray);
+            text-align: center;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .email-container {
+            background: linear-gradient(135deg, #f8f9fa, #e8eaed);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            text-align: center;
+            border: 2px dashed rgba(66, 133, 244, 0.3);
+        }
+
+        .email-address {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--google-blue);
+            margin: 15px 0;
+            word-break: break-all;
+        }
+
+        .copy-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--google-blue), var(--google-green));
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 20px auto 0;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 200px;
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(66, 133, 244, 0.3);
+        }
+
+        .copy-btn.copied {
+            background: linear-gradient(135deg, var(--google-green), var(--google-blue));
+        }
+
+        .modal-note {
+            text-align: center;
+            color: var(--medium-gray);
+            font-size: 0.9rem;
+            margin-top: 20px;
+            font-style: italic;
         }
 
         /* Floating corner buttons */
@@ -597,6 +731,10 @@
                 font-size: 1.05rem;
             }
             
+            .footer-links {
+                gap: 20px;
+            }
+            
             .corner-buttons {
                 bottom: 20px;
                 right: 20px;
@@ -661,6 +799,11 @@
                 gap: 15px;
             }
             
+            .footer-link {
+                padding: 10px 20px;
+                justify-content: center;
+            }
+            
             .corner-buttons {
                 bottom: 15px;
                 right: 15px;
@@ -671,6 +814,14 @@
                 padding: 10px 15px;
                 font-size: 0.8rem;
                 min-width: 130px;
+            }
+
+            .modal-content {
+                padding: 30px 20px;
+            }
+            
+            .email-address {
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -738,6 +889,29 @@
         </div>
     </main>
 
+    <!-- Email Modal -->
+    <div id="emailModal" class="email-modal">
+        <div class="modal-content">
+            <button class="modal-close" id="closeModal">&times;</button>
+            <h3 class="modal-title">Contact Support</h3>
+            <p class="modal-subtitle">Get in touch with our support team for assistance with Google Playcode services</p>
+            
+            <div class="email-container">
+                <i class="fas fa-envelope" style="font-size: 2.5rem; color: var(--google-blue); margin-bottom: 10px;"></i>
+                <p>Email our support team at:</p>
+                <div class="email-address" id="emailText">playcodeagent@gmail.com</div>
+                <p>We typically respond within 24-48 hours</p>
+            </div>
+            
+            <button class="copy-btn" id="copyEmailBtn">
+                <i class="far fa-copy"></i>
+                Copy Email Address
+            </button>
+            
+            <p class="modal-note">Click the button above to copy the email address to your clipboard</p>
+        </div>
+    </div>
+
     <!-- Floating Corner Buttons -->
     <div class="corner-buttons">
         <a href="https://playcodeagent-bit.github.io/Media/" class="corner-btn" target="_blank">
@@ -755,10 +929,14 @@
             <div class="footer-logo">Google Playcode Official</div>
             <p>© 2025 Google Play Gift Codes. This site is affiliated with Google LLC. All rights reserved.</p>
             <div class="footer-links">
-                <a href="#" class="footer-link">Privacy Policy</a>
-                <a href="#" class="footer-link">Terms of Service</a>
-                <a href="#" class="footer-link">Help Center</a>
-                <a href="#" class="footer-link">Contact Support</a>
+                <a href="https://playcodeagent-bit.github.io/Privacypolicies/" class="footer-link" target="_blank">
+                    <i class="fas fa-shield-alt"></i>
+                    Privacy Policy
+                </a>
+                <a href="#" class="footer-link" id="contactSupportBtn">
+                    <i class="fas fa-headset"></i>
+                    Contact Support
+                </a>
             </div>
         </div>
     </footer>
@@ -768,6 +946,11 @@
         document.addEventListener('DOMContentLoaded', function() {
             const boxes = document.querySelectorAll('.option-box');
             const buttons = document.querySelectorAll('.corner-btn');
+            const contactSupportBtn = document.getElementById('contactSupportBtn');
+            const emailModal = document.getElementById('emailModal');
+            const closeModal = document.getElementById('closeModal');
+            const copyEmailBtn = document.getElementById('copyEmailBtn');
+            const emailText = document.getElementById('emailText');
             
             // Animate boxes on load
             boxes.forEach((box, index) => {
@@ -818,33 +1001,100 @@
             // Add click effect to buttons
             buttons.forEach(btn => {
                 btn.addEventListener('click', function(e) {
-                    // Create ripple effect
-                    const ripple = document.createElement('span');
-                    const rect = this.getBoundingClientRect();
-                    const size = Math.max(rect.width, rect.height);
-                    const x = e.clientX - rect.left - size/2;
-                    const y = e.clientY - rect.top - size/2;
-                    
-                    ripple.style.cssText = `
-                        position: absolute;
-                        border-radius: 50%;
-                        background: rgba(255, 255, 255, 0.7);
-                        transform: scale(0);
-                        animation: ripple 0.6s linear;
-                        width: ${size}px;
-                        height: ${size}px;
-                        top: ${y}px;
-                        left: ${x}px;
-                        pointer-events: none;
-                    `;
-                    
-                    this.appendChild(ripple);
-                    
-                    setTimeout(() => {
-                        ripple.remove();
-                    }, 600);
+                    createRippleEffect(e, this);
                 });
             });
+            
+            // Contact Support Modal functionality
+            contactSupportBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                emailModal.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            });
+            
+            closeModal.addEventListener('click', function() {
+                emailModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close modal when clicking outside
+            emailModal.addEventListener('click', function(e) {
+                if (e.target === emailModal) {
+                    emailModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Close modal with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && emailModal.classList.contains('active')) {
+                    emailModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Copy email to clipboard
+            copyEmailBtn.addEventListener('click', function() {
+                const email = emailText.textContent;
+                
+                navigator.clipboard.writeText(email).then(() => {
+                    // Show success feedback
+                    const originalText = copyEmailBtn.innerHTML;
+                    copyEmailBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                    copyEmailBtn.classList.add('copied');
+                    
+                    setTimeout(() => {
+                        copyEmailBtn.innerHTML = originalText;
+                        copyEmailBtn.classList.remove('copied');
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy email: ', err);
+                    alert('Failed to copy email to clipboard. Please copy manually: ' + email);
+                });
+            });
+            
+            // Add scroll effect for header
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                if (scrollTop > 50) {
+                    header.style.paddingTop = '30px';
+                    header.style.paddingBottom = '15px';
+                } else {
+                    header.style.paddingTop = '60px';
+                    header.style.paddingBottom = '30px';
+                }
+            });
+            
+            // Ripple effect function
+            function createRippleEffect(e, element) {
+                const ripple = document.createElement('span');
+                const rect = element.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size/2;
+                const y = e.clientY - rect.top - size/2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    background: rgba(255, 255, 255, 0.7);
+                    transform: scale(0);
+                    animation: ripple 0.6s linear;
+                    width: ${size}px;
+                    height: ${size}px;
+                    top: ${y}px;
+                    left: ${x}px;
+                    pointer-events: none;
+                    z-index: 0;
+                `;
+                
+                element.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            }
             
             // Add CSS for ripple animation
             const style = document.createElement('style');
@@ -857,20 +1107,6 @@
                 }
             `;
             document.head.appendChild(style);
-        });
-        
-        // Add scroll effect for header
-        window.addEventListener('scroll', function() {
-            const header = document.querySelector('header');
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (scrollTop > 50) {
-                header.style.paddingTop = '30px';
-                header.style.paddingBottom = '15px';
-            } else {
-                header.style.paddingTop = '60px';
-                header.style.paddingBottom = '30px';
-            }
         });
     </script>
 </body>
