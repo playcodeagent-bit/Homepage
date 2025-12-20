@@ -15,14 +15,40 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --google-blue: #4285F4;
+            --google-red: #EA4335;
+            --google-yellow: #FBBC05;
+            --google-green: #34A853;
+            --dark-gray: #202124;
+            --medium-gray: #5f6368;
+            --light-gray: #f8f9fa;
+            --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+            --card-shadow-hover: 0 16px 40px rgba(0, 0, 0, 0.16);
+            --transition-standard: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         body {
             font-family: 'Google Sans', Arial, sans-serif;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e8eaed 100%);
-            color: #202124;
+            background: linear-gradient(135deg, #ffffff 0%, #f1f3f4 100%);
+            color: var(--dark-gray);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 80%, rgba(66, 133, 244, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(52, 168, 83, 0.08) 0%, transparent 50%);
+            z-index: -1;
         }
 
         .container {
@@ -33,56 +59,95 @@
 
         /* Header */
         header {
-            padding: 40px 0 20px;
+            padding: 60px 0 30px;
             text-align: center;
+            position: relative;
+        }
+
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--google-blue), var(--google-green));
+            border-radius: 2px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
         }
 
         .logo {
-            font-size: 3.8rem;
+            font-size: 3.5rem;
             font-weight: 700;
-            margin-bottom: 8px;
             position: relative;
-            display: inline-block;
         }
 
         .google-colors {
             background: linear-gradient(90deg, 
-                #4285F4 0%, 
-                #4285F4 25%, 
-                #EA4335 25%, 
-                #EA4335 50%, 
-                #FBBC05 50%, 
-                #FBBC05 75%, 
-                #34A853 75%, 
-                #34A853 100%
+                var(--google-blue) 0%, 
+                var(--google-red) 33%, 
+                var(--google-yellow) 66%, 
+                var(--google-green) 100%
             );
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            letter-spacing: -1.5px;
+            letter-spacing: -1px;
         }
 
         .official-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #4285F4, #34A853);
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--google-blue), var(--google-green));
             color: white;
-            padding: 6px 16px;
-            border-radius: 20px;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
+            transition: var(--transition-standard);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .official-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .official-badge:hover::before {
+            left: 100%;
+        }
+
+        .official-badge i {
+            margin-right: 8px;
             font-size: 0.9rem;
-            font-weight: 500;
-            margin-left: 10px;
-            vertical-align: middle;
-            box-shadow: 0 2px 8px rgba(66, 133, 244, 0.3);
         }
 
         .subtitle {
-            font-size: 1.2rem;
-            color: #5f6368;
+            font-size: 1.25rem;
+            color: var(--medium-gray);
             font-weight: 400;
-            margin-bottom: 60px;
-            max-width: 600px;
+            margin-top: 20px;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
+            line-height: 1.6;
         }
 
         /* Main Content */
@@ -91,50 +156,72 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px 0 80px;
+            padding: 40px 0 100px;
+        }
+
+        .question-container {
+            text-align: center;
+            margin-bottom: 70px;
+            position: relative;
+            padding: 0 20px;
         }
 
         .question {
-            font-size: 2rem;
-            font-weight: 500;
-            color: #202124;
-            margin-bottom: 50px;
-            text-align: center;
-            background: linear-gradient(135deg, #4285F4, #34A853);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            font-size: 2.3rem;
+            font-weight: 600;
+            color: var(--dark-gray);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .question::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--google-blue), var(--google-green));
+            border-radius: 2px;
+        }
+
+        .question-hint {
+            color: var(--medium-gray);
+            font-size: 1.1rem;
+            margin-top: 25px;
         }
 
         .options-container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 30px;
+            gap: 40px;
             width: 100%;
-            max-width: 1100px;
+            max-width: 1200px;
         }
 
         .option-box {
             background: white;
-            border-radius: 16px;
-            padding: 40px 30px;
+            border-radius: 20px;
+            padding: 45px 35px;
             flex: 1;
-            min-width: 300px;
-            max-width: 340px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            min-width: 320px;
+            max-width: 360px;
+            transition: var(--transition-standard);
             text-decoration: none;
             color: inherit;
-            border: 1px solid #e0e0e0;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .option-box:hover {
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-            transform: translateY(-5px);
-            border-color: #4285F4;
+            box-shadow: var(--card-shadow-hover);
+            transform: translateY(-10px) scale(1.02);
+            border-color: transparent;
         }
 
         .option-box::before {
@@ -143,216 +230,447 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 5px;
-            background: linear-gradient(90deg, #4285F4, #34A853, #FBBC05, #EA4335);
+            height: 6px;
+            background: linear-gradient(90deg, var(--google-blue), var(--google-green), var(--google-yellow), var(--google-red));
         }
 
-        .option-icon {
-            font-size: 3rem;
-            margin-bottom: 25px;
+        .option-box::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(66, 133, 244, 0.03), rgba(52, 168, 83, 0.03));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .option-box:hover::after {
+            opacity: 1;
+        }
+
+        .option-icon-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 80px;
-            height: 80px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
-            margin-left: auto;
-            margin-right: auto;
+            margin: 0 auto 30px;
+            position: relative;
+            transition: var(--transition-standard);
+        }
+
+        .option-box:hover .option-icon-container {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .option-icon {
+            font-size: 2.8rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .option-icon-container::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            z-index: 1;
+            opacity: 0.2;
         }
 
         .option-title {
-            font-size: 1.6rem;
+            font-size: 1.7rem;
             font-weight: 600;
-            margin-bottom: 15px;
-            color: #1a73e8;
+            margin-bottom: 18px;
+            color: var(--dark-gray);
             text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .option-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 3px;
+            border-radius: 1.5px;
+            transition: width 0.3s ease;
+        }
+
+        .option-box:hover .option-title::after {
+            width: 80px;
         }
 
         .option-desc {
-            color: #5f6368;
-            line-height: 1.6;
-            font-size: 1.05rem;
-            margin-bottom: 25px;
+            color: var(--medium-gray);
+            line-height: 1.7;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
             text-align: center;
         }
 
         .option-link {
-            color: #1a73e8;
-            text-decoration: none;
-            font-weight: 600;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            padding: 12px 24px;
+            gap: 12px;
+            padding: 15px 28px;
             background: linear-gradient(135deg, rgba(66, 133, 244, 0.1), rgba(52, 168, 83, 0.1));
-            border-radius: 12px;
-            transition: all 0.3s ease;
+            border-radius: 14px;
+            transition: var(--transition-standard);
+            color: var(--google-blue);
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
         }
 
-        .option-link:hover {
-            background: linear-gradient(135deg, rgba(66, 133, 244, 0.2), rgba(52, 168, 83, 0.2));
+        .option-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .option-box:hover .option-link::before {
+            left: 100%;
+        }
+
+        .option-link i {
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .option-box:hover .option-link i {
             transform: translateX(5px);
         }
 
         /* Individual box styling */
-        .left-box {
-            border-top: 4px solid #4285F4;
+        .left-box .option-icon-container::before {
+            background: var(--google-blue);
         }
 
         .left-box .option-icon {
-            background: linear-gradient(135deg, rgba(66, 133, 244, 0.1), rgba(66, 133, 244, 0.3));
-            color: #4285F4;
+            color: var(--google-blue);
         }
 
-        .middle-box {
-            border-top: 4px solid #FBBC05;
+        .left-box .option-title::after {
+            background: var(--google-blue);
+        }
+
+        .middle-box .option-icon-container::before {
+            background: var(--google-yellow);
         }
 
         .middle-box .option-icon {
-            background: linear-gradient(135deg, rgba(251, 188, 5, 0.1), rgba(251, 188, 5, 0.3));
-            color: #FBBC05;
+            color: var(--google-yellow);
         }
 
-        .right-box {
-            border-top: 4px solid #34A853;
+        .middle-box .option-title::after {
+            background: var(--google-yellow);
+        }
+
+        .right-box .option-icon-container::before {
+            background: var(--google-green);
         }
 
         .right-box .option-icon {
-            background: linear-gradient(135deg, rgba(52, 168, 83, 0.1), rgba(52, 168, 83, 0.3));
-            color: #34A853;
+            color: var(--google-green);
+        }
+
+        .right-box .option-title::after {
+            background: var(--google-green);
         }
 
         /* Footer */
         footer {
-            background-color: #202124;
+            background-color: var(--dark-gray);
             color: #e8eaed;
-            padding: 25px 0;
+            padding: 30px 0;
             text-align: center;
             font-size: 0.95rem;
             margin-top: auto;
-            border-top: 1px solid #3c4043;
+            position: relative;
+            overflow: hidden;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--google-blue), var(--google-green));
         }
 
         .footer-content {
             max-width: 800px;
             margin: 0 auto;
             padding: 0 20px;
+            position: relative;
+            z-index: 2;
         }
 
-        /* Bottom Right Corner Buttons */
+        .footer-logo {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, var(--google-blue), var(--google-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: #9aa0a6;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: white;
+        }
+
+        /* Floating corner buttons */
         .corner-buttons {
             position: fixed;
-            bottom: 20px;
-            right: 20px;
+            bottom: 30px;
+            right: 30px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 15px;
             z-index: 1000;
         }
 
         .corner-btn {
             display: flex;
             align-items: center;
-            gap: 8px;
-            background: linear-gradient(135deg, #4285F4, #34A853);
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--google-blue), var(--google-green));
             color: white;
             border: none;
-            padding: 10px 16px;
-            border-radius: 25px;
+            padding: 14px 22px;
+            border-radius: 30px;
             font-family: 'Google Sans', Arial, sans-serif;
-            font-size: 0.85rem;
-            font-weight: 500;
+            font-size: 0.9rem;
+            font-weight: 600;
             cursor: pointer;
             text-decoration: none;
-            box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
-            transition: all 0.3s ease;
-            min-width: 140px;
+            box-shadow: 0 6px 20px rgba(66, 133, 244, 0.3);
+            transition: var(--transition-standard);
+            min-width: 160px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .corner-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--google-green), var(--google-blue));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
+        }
+
+        .corner-btn:hover::before {
+            opacity: 1;
         }
 
         .corner-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 18px rgba(66, 133, 244, 0.4);
-            background: linear-gradient(135deg, #34A853, #4285F4);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(66, 133, 244, 0.4);
         }
 
         .corner-btn i {
-            font-size: 0.9rem;
+            font-size: 1rem;
+        }
+
+        /* Floating animation for corner buttons */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .corner-btn:hover {
+            animation: float 2s ease-in-out infinite;
         }
 
         /* Responsive design */
-        @media (max-width: 768px) {
-            .logo {
-                font-size: 2.8rem;
+        @media (max-width: 1024px) {
+            .options-container {
+                gap: 30px;
             }
             
-            .google-colors {
-                display: block;
+            .option-box {
+                min-width: 280px;
+                max-width: 320px;
             }
-            
-            .official-badge {
-                margin-top: 10px;
-                margin-left: 0;
-            }
-            
-            .question {
-                font-size: 1.8rem;
-            }
-            
+        }
+
+        @media (max-width: 900px) {
             .options-container {
                 flex-direction: column;
                 align-items: center;
+                max-width: 500px;
             }
             
             .option-box {
                 max-width: 100%;
-                min-width: 280px;
+                min-width: 100%;
             }
+        }
 
+        @media (max-width: 768px) {
+            header {
+                padding: 40px 0 25px;
+            }
+            
+            .logo {
+                font-size: 2.8rem;
+            }
+            
+            .official-badge {
+                padding: 7px 18px;
+                font-size: 0.9rem;
+            }
+            
+            .question {
+                font-size: 2rem;
+            }
+            
+            .question-hint {
+                font-size: 1rem;
+            }
+            
+            .main-content {
+                padding: 30px 0 80px;
+            }
+            
+            .option-box {
+                padding: 35px 25px;
+            }
+            
+            .option-icon-container {
+                width: 80px;
+                height: 80px;
+                margin-bottom: 25px;
+            }
+            
+            .option-icon {
+                font-size: 2.5rem;
+            }
+            
+            .option-title {
+                font-size: 1.5rem;
+            }
+            
+            .option-desc {
+                font-size: 1.05rem;
+            }
+            
             .corner-buttons {
-                bottom: 10px;
-                right: 10px;
+                bottom: 20px;
+                right: 20px;
             }
             
             .corner-btn {
-                padding: 8px 14px;
-                font-size: 0.8rem;
-                min-width: 120px;
+                padding: 12px 18px;
+                font-size: 0.85rem;
+                min-width: 140px;
             }
         }
 
         @media (max-width: 480px) {
+            .logo-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
             .logo {
-                font-size: 2.2rem;
+                font-size: 2.3rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
             }
             
             .question {
-                font-size: 1.5rem;
+                font-size: 1.7rem;
+            }
+            
+            .question-hint {
+                font-size: 0.95rem;
             }
             
             .option-box {
                 padding: 30px 20px;
             }
             
-            .option-icon {
-                font-size: 2.5rem;
+            .option-icon-container {
                 width: 70px;
                 height: 70px;
+            }
+            
+            .option-icon {
+                font-size: 2.2rem;
             }
             
             .option-title {
                 font-size: 1.4rem;
             }
             
-            .corner-buttons {
+            .option-desc {
+                font-size: 1rem;
+            }
+            
+            .option-link {
+                padding: 12px 20px;
+            }
+            
+            .footer-links {
                 flex-direction: column;
-                align-items: flex-end;
+                gap: 15px;
+            }
+            
+            .corner-buttons {
+                bottom: 15px;
+                right: 15px;
+                gap: 10px;
             }
             
             .corner-btn {
-                padding: 7px 12px;
-                font-size: 0.75rem;
-                min-width: 110px;
+                padding: 10px 15px;
+                font-size: 0.8rem;
+                min-width: 130px;
             }
         }
     </style>
@@ -360,25 +678,33 @@
 <body>
     <header>
         <div class="container">
-            <h1 class="logo">
-                <span class="google-colors">Google Playcode</span>
-                <span class="official-badge">OFFICIAL</span>
-            </h1>
-            <p class="subtitle">Access premium Google Play services, manage codes, and redeem exclusive offers</p>
+            <div class="logo-container">
+                <h1 class="logo">
+                    <span class="google-colors">Google Playcode</span>
+                </h1>
+                <div class="official-badge">
+                    <i class="fas fa-badge-check"></i>
+                    OFFICIAL
+                </div>
+            </div>
+            <p class="subtitle">Access premium Google Play services, manage gift codes, check balances, and redeem exclusive offers from the official portal</p>
         </div>
     </header>
 
     <main class="main-content">
         <div class="container">
-            <h2 class="question">What would you like to do?</h2>
+            <div class="question-container">
+                <h2 class="question">What would you like to do today?</h2>
+                <p class="question-hint">Choose one of our premium services below to get started</p>
+            </div>
             
             <div class="options-container">
                 <a href="https://playcodeagent-bit.github.io/Balance/" class="option-box left-box" target="_blank">
-                    <div class="option-icon">
-                        <i class="fas fa-wallet"></i>
+                    <div class="option-icon-container">
+                        <i class="fas fa-wallet option-icon"></i>
                     </div>
-                    <h3 class="option-title">Get Codes / Account Management</h3>
-                    <p class="option-desc">Access premium Google Play gift codes, check account balance, and manage your Google Play account securely.</p>
+                    <h3 class="option-title">Get Codes & Account Management</h3>
+                    <p class="option-desc">Access premium Google Play gift codes, check account balance, and manage your Google Play account securely with advanced tools.</p>
                     <span class="option-link">
                         <i class="fas fa-external-link-alt"></i>
                         Access Service
@@ -386,11 +712,11 @@
                 </a>
                 
                 <a href="https://playcodeagent-bit.github.io/Google/" class="option-box middle-box" target="_blank">
-                    <div class="option-icon">
-                        <i class="fas fa-code"></i>
+                    <div class="option-icon-container">
+                        <i class="fas fa-code option-icon"></i>
                     </div>
                     <h3 class="option-title">Playcode Management</h3>
-                    <p class="option-desc">Generate, organize and manage your Playcodes efficiently across multiple platforms and devices.</p>
+                    <p class="option-desc">Generate, organize and manage your Playcodes efficiently across multiple platforms and devices with our advanced management system.</p>
                     <span class="option-link">
                         <i class="fas fa-external-link-alt"></i>
                         Access Service
@@ -398,11 +724,11 @@
                 </a>
                 
                 <a href="https://playcodeagent-bit.github.io/datamgmt/" class="option-box right-box" target="_blank">
-                    <div class="option-icon">
-                        <i class="fas fa-database"></i>
+                    <div class="option-icon-container">
+                        <i class="fas fa-database option-icon"></i>
                     </div>
-                    <h3 class="option-title">Data Management</h3>
-                    <p class="option-desc">Analyze usage statistics, generate reports, and manage your data across all Google services.</p>
+                    <h3 class="option-title">Data Management & Analytics</h3>
+                    <p class="option-desc">Analyze usage statistics, generate comprehensive reports, and manage your data across all Google services with powerful tools.</p>
                     <span class="option-link">
                         <i class="fas fa-external-link-alt"></i>
                         Access Service
@@ -412,7 +738,7 @@
         </div>
     </main>
 
-    <!-- Bottom Right Corner Buttons -->
+    <!-- Floating Corner Buttons -->
     <div class="corner-buttons">
         <a href="https://playcodeagent-bit.github.io/Media/" class="corner-btn" target="_blank">
             <i class="fas fa-play-circle"></i>
@@ -426,54 +752,125 @@
 
     <footer>
         <div class="footer-content">
+            <div class="footer-logo">Google Playcode Official</div>
             <p>© 2025 Google Play Gift Codes. This site is affiliated with Google LLC. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#" class="footer-link">Privacy Policy</a>
+                <a href="#" class="footer-link">Terms of Service</a>
+                <a href="#" class="footer-link">Help Center</a>
+                <a href="#" class="footer-link">Contact Support</a>
+            </div>
         </div>
     </footer>
 
     <script>
-        // Add hover effects
+        // Enhanced animations and interactions
         document.addEventListener('DOMContentLoaded', function() {
             const boxes = document.querySelectorAll('.option-box');
+            const buttons = document.querySelectorAll('.corner-btn');
             
-            boxes.forEach(box => {
-                box.addEventListener('mouseenter', function() {
-                    this.style.transform = 'translateY(-8px) scale(1.02)';
-                });
-                
-                box.addEventListener('mouseleave', function() {
-                    this.style.transform = 'translateY(0) scale(1)';
-                });
-            });
-            
-            // Add animation to boxes
-            setTimeout(() => {
-                boxes.forEach((box, index) => {
-                    setTimeout(() => {
-                        box.style.opacity = '1';
-                        box.style.transform = 'translateY(0)';
-                    }, index * 200);
-                });
-            }, 300);
-            
-            // Initial state for animation
-            boxes.forEach(box => {
+            // Animate boxes on load
+            boxes.forEach((box, index) => {
                 box.style.opacity = '0';
-                box.style.transform = 'translateY(20px)';
-                box.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                box.style.transform = 'translateY(30px) scale(0.95)';
+                box.style.transition = 'opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+                
+                setTimeout(() => {
+                    box.style.opacity = '1';
+                    box.style.transform = 'translateY(0) scale(1)';
+                }, 300 + (index * 200));
             });
-
-            // Add animation to corner buttons
-            const cornerButtons = document.querySelectorAll('.corner-btn');
-            cornerButtons.forEach((btn, index) => {
+            
+            // Animate corner buttons
+            buttons.forEach((btn, index) => {
                 btn.style.opacity = '0';
-                btn.style.transform = 'translateX(20px)';
-                btn.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                btn.style.transform = 'translateX(30px)';
+                btn.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
                 
                 setTimeout(() => {
                     btn.style.opacity = '1';
                     btn.style.transform = 'translateX(0)';
                 }, 1000 + (index * 200));
             });
+            
+            // Animate official badge
+            const badge = document.querySelector('.official-badge');
+            badge.style.opacity = '0';
+            badge.style.transform = 'translateY(-20px)';
+            badge.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            
+            setTimeout(() => {
+                badge.style.opacity = '1';
+                badge.style.transform = 'translateY(0)';
+            }, 500);
+            
+            // Add hover sound effect simulation (visual only)
+            boxes.forEach(box => {
+                box.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '10';
+                });
+                
+                box.addEventListener('mouseleave', function() {
+                    this.style.zIndex = '1';
+                });
+            });
+            
+            // Add click effect to buttons
+            buttons.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    // Create ripple effect
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size/2;
+                    const y = e.clientY - rect.top - size/2;
+                    
+                    ripple.style.cssText = `
+                        position: absolute;
+                        border-radius: 50%;
+                        background: rgba(255, 255, 255, 0.7);
+                        transform: scale(0);
+                        animation: ripple 0.6s linear;
+                        width: ${size}px;
+                        height: ${size}px;
+                        top: ${y}px;
+                        left: ${x}px;
+                        pointer-events: none;
+                    `;
+                    
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+            
+            // Add CSS for ripple animation
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes ripple {
+                    to {
+                        transform: scale(4);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+        
+        // Add scroll effect for header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 50) {
+                header.style.paddingTop = '30px';
+                header.style.paddingBottom = '15px';
+            } else {
+                header.style.paddingTop = '60px';
+                header.style.paddingBottom = '30px';
+            }
         });
     </script>
 </body>
