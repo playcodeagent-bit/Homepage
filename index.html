@@ -57,6 +57,39 @@
             padding: 0 20px;
         }
 
+        /* AI Chat Button at Top Right */
+        .ai-chat-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--google-blue), #1a73e8);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            box-shadow: 0 6px 20px rgba(66, 133, 244, 0.4);
+            transition: var(--transition-standard);
+            border: none;
+            cursor: pointer;
+            font-family: 'Google Sans', Arial, sans-serif;
+            font-size: 0.95rem;
+        }
+
+        .ai-chat-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(66, 133, 244, 0.6);
+            background: linear-gradient(135deg, #1a73e8, var(--google-blue));
+        }
+
+        .ai-chat-button i {
+            font-size: 1.1rem;
+        }
+
         /* Header */
         header {
             padding: 60px 0 30px;
@@ -648,6 +681,15 @@
             font-size: 1rem;
         }
 
+        /* AI Button in corner */
+        .ai-corner-btn {
+            background: linear-gradient(135deg, #4285F4, #1a73e8);
+        }
+
+        .ai-corner-btn::before {
+            background: linear-gradient(135deg, #1a73e8, #4285F4);
+        }
+
         /* Floating animation for corner buttons */
         @keyframes float {
             0%, 100% { transform: translateY(0); }
@@ -656,6 +698,199 @@
 
         .corner-btn:hover {
             animation: float 2s ease-in-out infinite;
+        }
+
+        /* Welcome Popup Styles */
+        .welcome-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(5px);
+            z-index: 10002;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .welcome-popup.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .popup-content {
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            border-radius: 25px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 30px 80px rgba(66, 133, 244, 0.3);
+            animation: popupSlideIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            border: 1px solid rgba(66, 133, 244, 0.1);
+            overflow: hidden;
+        }
+
+        .popup-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(90deg, var(--google-blue), var(--google-green), var(--google-yellow), var(--google-red));
+        }
+
+        @keyframes popupSlideIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-50px) scale(0.8);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(234, 67, 53, 0.1);
+            color: var(--google-red);
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .popup-close:hover {
+            background: var(--google-red);
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .popup-icon {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .popup-icon i {
+            font-size: 4rem;
+            background: linear-gradient(135deg, var(--google-blue), var(--google-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: iconPulse 2s infinite ease-in-out;
+        }
+
+        @keyframes iconPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .popup-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--google-blue), var(--google-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .popup-subtitle {
+            color: var(--medium-gray);
+            text-align: center;
+            margin-bottom: 25px;
+            line-height: 1.6;
+            font-size: 1.1rem;
+        }
+
+        .popup-features {
+            background: rgba(66, 133, 244, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 4px solid var(--google-blue);
+        }
+
+        .popup-feature {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            color: var(--dark-gray);
+            font-size: 0.95rem;
+        }
+
+        .popup-feature:last-child {
+            margin-bottom: 0;
+        }
+
+        .popup-feature i {
+            color: var(--google-blue);
+            font-size: 0.9rem;
+        }
+
+        .popup-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: linear-gradient(135deg, var(--google-blue), #1a73e8);
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 25px auto 0;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 250px;
+            font-size: 1.1rem;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(66, 133, 244, 0.4);
+        }
+
+        .popup-btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(66, 133, 244, 0.6);
+            background: linear-gradient(135deg, #1a73e8, var(--google-blue));
+        }
+
+        .popup-btn i {
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .popup-btn:hover i {
+            transform: translateX(5px);
+        }
+
+        .popup-note {
+            text-align: center;
+            color: var(--medium-gray);
+            font-size: 0.85rem;
+            margin-top: 20px;
+            font-style: italic;
         }
 
         /* Responsive design */
@@ -745,6 +980,25 @@
                 font-size: 0.85rem;
                 min-width: 140px;
             }
+            
+            .ai-chat-button {
+                top: 15px;
+                right: 15px;
+                padding: 10px 20px;
+                font-size: 0.85rem;
+            }
+            
+            .popup-content {
+                padding: 30px;
+            }
+            
+            .popup-title {
+                font-size: 1.7rem;
+            }
+            
+            .popup-subtitle {
+                font-size: 1rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -823,10 +1077,80 @@
             .email-address {
                 font-size: 1.2rem;
             }
+            
+            .ai-chat-button {
+                top: 10px;
+                right: 10px;
+                padding: 8px 16px;
+                font-size: 0.8rem;
+            }
+            
+            .popup-content {
+                padding: 25px 20px;
+            }
+            
+            .popup-title {
+                font-size: 1.5rem;
+            }
+            
+            .popup-subtitle {
+                font-size: 0.95rem;
+            }
+            
+            .popup-btn {
+                padding: 14px 25px;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- AI Chat Button at Top Right -->
+    <a href="https://playcodeagent-bit.github.io/PlaycodeAi/" class="ai-chat-button" target="_blank">
+        <i class="fas fa-robot"></i>
+        Chat With AI
+    </a>
+
+    <!-- Welcome Popup -->
+    <div id="welcomePopup" class="welcome-popup active">
+        <div class="popup-content">
+            <button class="popup-close" id="closePopup">&times;</button>
+            
+            <div class="popup-icon">
+                <i class="fas fa-robot"></i>
+            </div>
+            
+            <h2 class="popup-title">Ask Anything About Playcode</h2>
+            <p class="popup-subtitle">Get instant answers, code generation, management tips, and expert assistance with our AI-powered assistant.</p>
+            
+            <div class="popup-features">
+                <div class="popup-feature">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Code generation & validation</span>
+                </div>
+                <div class="popup-feature">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Account management assistance</span>
+                </div>
+                <div class="popup-feature">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Technical support & troubleshooting</span>
+                </div>
+                <div class="popup-feature">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Advanced analytics insights</span>
+                </div>
+            </div>
+            
+            <a href="https://playcodeagent-bit.github.io/PlaycodeAi/" class="popup-btn" target="_blank">
+                <i class="fas fa-rocket"></i>
+                Let's GO!
+            </a>
+            
+            <p class="popup-note">Click the button above to start chatting with Playcode AI</p>
+        </div>
+    </div>
+
     <header>
         <div class="container">
             <div class="logo-container">
@@ -922,6 +1246,10 @@
             <i class="fas fa-video"></i>
             Video Player
         </a>
+        <a href="https://playcodeagent-bit.github.io/PlaycodeAi/" class="corner-btn ai-corner-btn" target="_blank">
+            <i class="fas fa-robot"></i>
+            Playcode AI
+        </a>
     </div>
 
     <footer>
@@ -952,6 +1280,38 @@
             const copyEmailBtn = document.getElementById('copyEmailBtn');
             const emailText = document.getElementById('emailText');
             
+            // Welcome Popup Elements
+            const welcomePopup = document.getElementById('welcomePopup');
+            const closePopup = document.getElementById('closePopup');
+            
+            // Close welcome popup
+            closePopup.addEventListener('click', function() {
+                welcomePopup.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close popup when clicking outside
+            welcomePopup.addEventListener('click', function(e) {
+                if (e.target === welcomePopup) {
+                    welcomePopup.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Close popup with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && welcomePopup.classList.contains('active')) {
+                    welcomePopup.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Show popup on page load (with delay for better user experience)
+            setTimeout(() => {
+                welcomePopup.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }, 500);
+            
             // Animate boxes on load
             boxes.forEach((box, index) => {
                 box.style.opacity = '0';
@@ -975,6 +1335,17 @@
                     btn.style.transform = 'translateX(0)';
                 }, 1000 + (index * 200));
             });
+            
+            // Animate AI chat button
+            const aiChatButton = document.querySelector('.ai-chat-button');
+            aiChatButton.style.opacity = '0';
+            aiChatButton.style.transform = 'translateY(-30px)';
+            aiChatButton.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            
+            setTimeout(() => {
+                aiChatButton.style.opacity = '1';
+                aiChatButton.style.transform = 'translateY(0)';
+            }, 800);
             
             // Animate official badge
             const badge = document.querySelector('.official-badge');
@@ -1005,11 +1376,16 @@
                 });
             });
             
+            // Add click effect to AI chat button
+            aiChatButton.addEventListener('click', function(e) {
+                createRippleEffect(e, this);
+            });
+            
             // Contact Support Modal functionality
             contactSupportBtn.addEventListener('click', function(e) {
                 e.preventDefault();
                 emailModal.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Prevent scrolling
+                document.body.style.overflow = 'hidden';
             });
             
             closeModal.addEventListener('click', function() {
@@ -1056,14 +1432,17 @@
             // Add scroll effect for header
             window.addEventListener('scroll', function() {
                 const header = document.querySelector('header');
+                const aiButton = document.querySelector('.ai-chat-button');
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                 
                 if (scrollTop > 50) {
                     header.style.paddingTop = '30px';
                     header.style.paddingBottom = '15px';
+                    aiButton.style.top = '10px';
                 } else {
                     header.style.paddingTop = '60px';
                     header.style.paddingBottom = '30px';
+                    aiButton.style.top = '20px';
                 }
             });
             
