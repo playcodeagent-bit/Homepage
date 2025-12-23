@@ -6,7 +6,7 @@
     <title>Google Playcode Official</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
@@ -23,514 +23,456 @@
             --dark-gray: #202124;
             --medium-gray: #5f6368;
             --light-gray: #f8f9fa;
-            --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-            --card-shadow-hover: 0 16px 40px rgba(0, 0, 0, 0.16);
+            --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --card-shadow-hover: 0 12px 28px rgba(0, 0, 0, 0.12);
             --transition-standard: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --surface-color: #ffffff;
+            --background-color: #f8fafc;
+            --border-radius: 16px;
+            --gradient-primary: linear-gradient(135deg, #4285F4 0%, #34A853 100%);
+            --gradient-secondary: linear-gradient(135deg, #FBBC05 0%, #EA4335 100%);
         }
 
         body {
-            font-family: 'Google Sans', Arial, sans-serif;
-            background: linear-gradient(135deg, #ffffff 0%, #f1f3f4 100%);
+            font-family: 'Google Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background-color: var(--background-color);
             color: var(--dark-gray);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 80%, rgba(66, 133, 244, 0.08) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(52, 168, 83, 0.08) 0%, transparent 50%);
-            z-index: -1;
+            line-height: 1.6;
+            font-weight: 400;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1280px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 24px;
         }
 
-        /* AI Chat Button at Top Right */
-        .ai-chat-button {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 1001;
+        /* Professional Header */
+        .professional-header {
+            background: var(--surface-color);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .header-content {
             display: flex;
             align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, var(--google-blue), #1a73e8);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            box-shadow: 0 6px 20px rgba(66, 133, 244, 0.4);
-            transition: var(--transition-standard);
-            border: none;
-            cursor: pointer;
-            font-family: 'Google Sans', Arial, sans-serif;
-            font-size: 0.95rem;
+            justify-content: space-between;
         }
 
-        .ai-chat-button:hover {
-            transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(66, 133, 244, 0.6);
-            background: linear-gradient(135deg, #1a73e8, var(--google-blue));
-        }
-
-        .ai-chat-button i {
-            font-size: 1.1rem;
-        }
-
-        /* Header */
-        header {
-            padding: 60px 0 30px;
-            text-align: center;
-            position: relative;
-        }
-
-        header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--google-blue), var(--google-green));
-            border-radius: 2px;
-        }
-
-        .logo-container {
+        .logo-group {
             display: flex;
             align-items: center;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 15px;
+            gap: 16px;
         }
 
         .logo {
-            font-size: 3.5rem;
-            font-weight: 700;
-            position: relative;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
         }
 
-        .google-colors {
-            background: linear-gradient(90deg, 
-                var(--google-blue) 0%, 
-                var(--google-red) 33%, 
-                var(--google-yellow) 66%, 
-                var(--google-green) 100%
-            );
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            letter-spacing: -1px;
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--dark-gray);
         }
 
         .official-badge {
-            display: inline-flex;
-            align-items: center;
-            background: linear-gradient(135deg, var(--google-blue), var(--google-green));
+            background: linear-gradient(135deg, var(--google-blue), #1a73e8);
             color: white;
-            padding: 8px 20px;
-            border-radius: 25px;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .ai-chat-button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 10px 24px;
+            border-radius: 24px;
+            text-decoration: none;
+            font-weight: 500;
             font-size: 0.95rem;
-            font-weight: 600;
-            box-shadow: 0 4px 12px rgba(66, 133, 244, 0.3);
             transition: var(--transition-standard);
+            box-shadow: 0 2px 8px rgba(66, 133, 244, 0.3);
+        }
+
+        .ai-chat-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(66, 133, 244, 0.4);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            padding: 80px 0 60px;
+            text-align: center;
             position: relative;
             overflow: hidden;
         }
 
-        .official-badge::before {
-            content: '';
+        .hero-background {
             position: absolute;
             top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.7s ease;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(66, 133, 244, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(52, 168, 83, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(251, 188, 5, 0.03) 0%, transparent 60%);
+            z-index: -1;
         }
 
-        .official-badge:hover::before {
-            left: 100%;
+        .hero-title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--google-blue), var(--google-green));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.2;
         }
 
-        .official-badge i {
-            margin-right: 8px;
-            font-size: 0.9rem;
-        }
-
-        .subtitle {
+        .hero-subtitle {
             font-size: 1.25rem;
             color: var(--medium-gray);
-            font-weight: 400;
-            margin-top: 20px;
             max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
+            margin: 0 auto 40px;
+            font-weight: 400;
         }
 
-        /* Main Content */
-        .main-content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+        /* Services Grid */
+        .services-section {
             padding: 40px 0 100px;
         }
 
-        .question-container {
+        .section-title {
             text-align: center;
-            margin-bottom: 70px;
-            position: relative;
-            padding: 0 20px;
-        }
-
-        .question {
-            font-size: 2.3rem;
+            font-size: 2.25rem;
             font-weight: 600;
+            margin-bottom: 60px;
             color: var(--dark-gray);
-            margin-bottom: 15px;
             position: relative;
-            display: inline-block;
         }
 
-        .question::after {
+        .section-title::after {
             content: '';
             position: absolute;
-            bottom: -10px;
+            bottom: -12px;
             left: 50%;
             transform: translateX(-50%);
             width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--google-blue), var(--google-green));
-            border-radius: 2px;
+            height: 3px;
+            background: var(--gradient-primary);
+            border-radius: 1.5px;
         }
 
-        .question-hint {
-            color: var(--medium-gray);
-            font-size: 1.1rem;
-            margin-top: 25px;
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 32px;
+            margin-bottom: 64px;
         }
 
-        .options-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 40px;
-            width: 100%;
-            max-width: 1200px;
-        }
-
-        .option-box {
-            background: white;
-            border-radius: 20px;
-            padding: 45px 35px;
-            flex: 1;
-            min-width: 320px;
-            max-width: 360px;
+        .service-card {
+            background: var(--surface-color);
+            border-radius: var(--border-radius);
+            padding: 40px 32px;
             transition: var(--transition-standard);
             text-decoration: none;
             color: inherit;
             position: relative;
             overflow: hidden;
-            box-shadow: var(--card-shadow);
-            border: 1px solid rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
         }
 
-        .option-box:hover {
+        .service-card:hover {
+            transform: translateY(-8px);
             box-shadow: var(--card-shadow-hover);
-            transform: translateY(-10px) scale(1.02);
-            border-color: transparent;
+            border-color: rgba(66, 133, 244, 0.2);
         }
 
-        .option-box::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 6px;
-            background: linear-gradient(90deg, var(--google-blue), var(--google-green), var(--google-yellow), var(--google-red));
-        }
-
-        .option-box::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(66, 133, 244, 0.03), rgba(52, 168, 83, 0.03));
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .option-box:hover::after {
-            opacity: 1;
-        }
-
-        .option-icon-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 90px;
-            height: 90px;
-            border-radius: 50%;
-            margin: 0 auto 30px;
-            position: relative;
-            transition: var(--transition-standard);
-        }
-
-        .option-box:hover .option-icon-container {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .option-icon {
-            font-size: 2.8rem;
-            position: relative;
-            z-index: 2;
-        }
-
-        .option-icon-container::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            z-index: 1;
-            opacity: 0.2;
-        }
-
-        .option-title {
-            font-size: 1.7rem;
-            font-weight: 600;
-            margin-bottom: 18px;
-            color: var(--dark-gray);
-            text-align: center;
-            position: relative;
-            padding-bottom: 15px;
-        }
-
-        .option-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 3px;
-            border-radius: 1.5px;
-            transition: width 0.3s ease;
-        }
-
-        .option-box:hover .option-title::after {
+        .service-icon {
             width: 80px;
-        }
-
-        .option-desc {
-            color: var(--medium-gray);
-            line-height: 1.7;
-            font-size: 1.1rem;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        .option-link {
+            height: 80px;
+            border-radius: 20px;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
-            padding: 15px 28px;
-            background: linear-gradient(135deg, rgba(66, 133, 244, 0.1), rgba(52, 168, 83, 0.1));
-            border-radius: 14px;
-            transition: var(--transition-standard);
-            color: var(--google-blue);
-            font-weight: 600;
+            margin-bottom: 24px;
+            font-size: 2rem;
             position: relative;
-            overflow: hidden;
-            z-index: 2;
+            z-index: 1;
         }
 
-        .option-link::before {
+        .service-icon::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
-            transition: left 0.7s ease;
+            inset: 0;
+            border-radius: 20px;
+            opacity: 0.1;
+            z-index: -1;
         }
 
-        .option-box:hover .option-link::before {
-            left: 100%;
+        .service-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--dark-gray);
         }
 
-        .option-link i {
+        .service-description {
+            color: var(--medium-gray);
+            margin-bottom: 24px;
             font-size: 1rem;
-            transition: transform 0.3s ease;
+            line-height: 1.7;
         }
 
-        .option-box:hover .option-link i {
-            transform: translateX(5px);
+        .service-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--google-blue);
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(66, 133, 244, 0.08);
+            transition: var(--transition-standard);
         }
 
-        /* Individual box styling */
-        .left-box .option-icon-container::before {
-            background: var(--google-blue);
+        .service-card:hover .service-action {
+            background: rgba(66, 133, 244, 0.12);
+            transform: translateX(4px);
         }
 
-        .left-box .option-icon {
+        /* Color variations */
+        .service-card:nth-child(1) .service-icon {
             color: var(--google-blue);
         }
-
-        .left-box .option-title::after {
+        .service-card:nth-child(1) .service-icon::before {
             background: var(--google-blue);
         }
 
-        .middle-box .option-icon-container::before {
-            background: var(--google-yellow);
-        }
-
-        .middle-box .option-icon {
+        .service-card:nth-child(2) .service-icon {
             color: var(--google-yellow);
         }
-
-        .middle-box .option-title::after {
+        .service-card:nth-child(2) .service-icon::before {
             background: var(--google-yellow);
         }
 
-        .right-box .option-icon-container::before {
-            background: var(--google-green);
-        }
-
-        .right-box .option-icon {
+        .service-card:nth-child(3) .service-icon {
             color: var(--google-green);
         }
-
-        .right-box .option-title::after {
+        .service-card:nth-child(3) .service-icon::before {
             background: var(--google-green);
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 48px;
+        }
+
+        .quick-action-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 28px;
+            background: var(--surface-color);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: var(--border-radius);
+            text-decoration: none;
+            color: var(--dark-gray);
+            font-weight: 500;
+            transition: var(--transition-standard);
+            min-width: 180px;
+        }
+
+        .quick-action-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--card-shadow);
+            border-color: transparent;
+            background: var(--surface-color);
+        }
+
+        .quick-action-btn.ai {
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
         }
 
         /* Footer */
-        footer {
-            background-color: var(--dark-gray);
+        .professional-footer {
+            background: var(--dark-gray);
             color: #e8eaed;
-            padding: 30px 0;
-            text-align: center;
-            font-size: 0.95rem;
+            padding: 48px 0 32px;
             margin-top: auto;
-            position: relative;
-            overflow: hidden;
-        }
-
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, var(--google-blue), var(--google-green));
         }
 
         .footer-content {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 20px;
-            position: relative;
-            z-index: 2;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
         }
 
-        .footer-logo {
-            font-size: 1.2rem;
+        .footer-section h4 {
+            font-size: 1.1rem;
             font-weight: 600;
-            margin-bottom: 10px;
-            background: linear-gradient(90deg, var(--google-blue), var(--google-green));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            margin-bottom: 20px;
+            color: white;
         }
 
         .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 20px;
-            flex-wrap: wrap;
+            list-style: none;
         }
 
-        .footer-link {
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
             color: #9aa0a6;
             text-decoration: none;
-            transition: all 0.3s ease;
-            padding: 8px 15px;
-            border-radius: 20px;
-            display: inline-flex;
+            transition: color 0.2s ease;
+            display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .footer-link:hover {
+        .footer-links a:hover {
             color: white;
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
         }
 
-        .footer-link i {
+        .footer-bottom {
+            text-align: center;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #9aa0a6;
             font-size: 0.9rem;
         }
 
-        /* Email Modal Styles */
-        .email-modal {
-            display: none;
+        /* Enhanced Modal */
+        .enhanced-modal {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 10000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .email-modal.active {
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
             display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
         }
 
-        .modal-content {
-            background: white;
-            border-radius: 20px;
+        .enhanced-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-card {
+            background: var(--surface-color);
+            border-radius: var(--border-radius);
             padding: 40px;
             max-width: 500px;
             width: 90%;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: modalSlideIn 0.3s ease;
-            position: relative;
+            transform: translateY(30px);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        @keyframes modalSlideIn {
+        .enhanced-modal.active .modal-card {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--medium-gray);
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close:hover {
+            background: rgba(0, 0, 0, 0.06);
+            color: var(--dark-gray);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(-30px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -538,954 +480,402 @@
             }
         }
 
-        .modal-close {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--medium-gray);
-            cursor: pointer;
-            transition: color 0.3s ease;
+        .animate-in {
+            animation: fadeInUp 0.6s ease forwards;
         }
 
-        .modal-close:hover {
-            color: var(--google-red);
-        }
-
-        .modal-title {
-            font-size: 1.8rem;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: var(--dark-gray);
-            text-align: center;
-        }
-
-        .modal-subtitle {
-            color: var(--medium-gray);
-            text-align: center;
-            margin-bottom: 25px;
-            line-height: 1.6;
-        }
-
-        .email-container {
-            background: linear-gradient(135deg, #f8f9fa, #e8eaed);
-            border-radius: 15px;
-            padding: 25px;
-            margin: 20px 0;
-            text-align: center;
-            border: 2px dashed rgba(66, 133, 244, 0.3);
-        }
-
-        .email-address {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--google-blue);
-            margin: 15px 0;
-            word-break: break-all;
-        }
-
-        .copy-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: linear-gradient(135deg, var(--google-blue), var(--google-green));
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 25px;
-            font-weight: 600;
-            cursor: pointer;
-            margin: 20px auto 0;
-            transition: all 0.3s ease;
-            width: 100%;
-            max-width: 200px;
-        }
-
-        .copy-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(66, 133, 244, 0.3);
-        }
-
-        .copy-btn.copied {
-            background: linear-gradient(135deg, var(--google-green), var(--google-blue));
-        }
-
-        .modal-note {
-            text-align: center;
-            color: var(--medium-gray);
-            font-size: 0.9rem;
-            margin-top: 20px;
-            font-style: italic;
-        }
-
-        /* Floating corner buttons */
-        .corner-buttons {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            z-index: 1000;
-        }
-
-        .corner-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: linear-gradient(135deg, var(--google-blue), var(--google-green));
-            color: white;
-            border: none;
-            padding: 14px 22px;
-            border-radius: 30px;
-            font-family: 'Google Sans', Arial, sans-serif;
-            font-size: 0.9rem;
-            font-weight: 600;
-            cursor: pointer;
-            text-decoration: none;
-            box-shadow: 0 6px 20px rgba(66, 133, 244, 0.3);
-            transition: var(--transition-standard);
-            min-width: 160px;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .corner-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, var(--google-green), var(--google-blue));
-            opacity: 0;
-            transition: opacity 0.4s ease;
-            z-index: -1;
-        }
-
-        .corner-btn:hover::before {
-            opacity: 1;
-        }
-
-        .corner-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(66, 133, 244, 0.4);
-        }
-
-        .corner-btn i {
-            font-size: 1rem;
-        }
-
-        /* AI Button in corner */
-        .ai-corner-btn {
-            background: linear-gradient(135deg, #4285F4, #1a73e8);
-        }
-
-        .ai-corner-btn::before {
-            background: linear-gradient(135deg, #1a73e8, #4285F4);
-        }
-
-        /* Floating animation for corner buttons */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .corner-btn:hover {
-            animation: float 2s ease-in-out infinite;
-        }
-
-        /* Welcome Popup Styles */
-        .welcome-popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            backdrop-filter: blur(5px);
-            z-index: 10002;
-            justify-content: center;
-            align-items: center;
-            animation: fadeIn 0.3s ease;
-        }
-
-        .welcome-popup.active {
-            display: flex;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        .popup-content {
-            background: linear-gradient(135deg, #ffffff, #f8f9fa);
-            border-radius: 25px;
-            padding: 40px;
-            max-width: 500px;
-            width: 90%;
-            box-shadow: 0 30px 80px rgba(66, 133, 244, 0.3);
-            animation: popupSlideIn 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            position: relative;
-            border: 1px solid rgba(66, 133, 244, 0.1);
-            overflow: hidden;
-        }
-
-        .popup-content::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 8px;
-            background: linear-gradient(90deg, var(--google-blue), var(--google-green), var(--google-yellow), var(--google-red));
-        }
-
-        @keyframes popupSlideIn {
-            0% {
-                opacity: 0;
-                transform: translateY(-50px) scale(0.8);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        .popup-close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: rgba(234, 67, 53, 0.1);
-            color: var(--google-red);
-            border: none;
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 10;
-        }
-
-        .popup-close:hover {
-            background: var(--google-red);
-            color: white;
-            transform: rotate(90deg);
-        }
-
-        .popup-icon {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-
-        .popup-icon i {
-            font-size: 4rem;
-            background: linear-gradient(135deg, var(--google-blue), var(--google-green));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: iconPulse 2s infinite ease-in-out;
-        }
-
-        @keyframes iconPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .popup-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            text-align: center;
-            background: linear-gradient(135deg, var(--google-blue), var(--google-green));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-
-        .popup-subtitle {
-            color: var(--medium-gray);
-            text-align: center;
-            margin-bottom: 25px;
-            line-height: 1.6;
-            font-size: 1.1rem;
-        }
-
-        .popup-features {
-            background: rgba(66, 133, 244, 0.05);
-            border-radius: 15px;
-            padding: 20px;
-            margin: 20px 0;
-            border-left: 4px solid var(--google-blue);
-        }
-
-        .popup-feature {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 12px;
-            color: var(--dark-gray);
-            font-size: 0.95rem;
-        }
-
-        .popup-feature:last-child {
-            margin-bottom: 0;
-        }
-
-        .popup-feature i {
-            color: var(--google-blue);
-            font-size: 0.9rem;
-        }
-
-        .popup-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            background: linear-gradient(135deg, var(--google-blue), #1a73e8);
-            color: white;
-            border: none;
-            padding: 16px 32px;
-            border-radius: 25px;
-            font-weight: 600;
-            cursor: pointer;
-            margin: 25px auto 0;
-            transition: all 0.3s ease;
-            width: 100%;
-            max-width: 250px;
-            font-size: 1.1rem;
-            text-decoration: none;
-            box-shadow: 0 8px 25px rgba(66, 133, 244, 0.4);
-        }
-
-        .popup-btn:hover {
-            transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 12px 30px rgba(66, 133, 244, 0.6);
-            background: linear-gradient(135deg, #1a73e8, var(--google-blue));
-        }
-
-        .popup-btn i {
-            font-size: 1rem;
-            transition: transform 0.3s ease;
-        }
-
-        .popup-btn:hover i {
-            transform: translateX(5px);
-        }
-
-        .popup-note {
-            text-align: center;
-            color: var(--medium-gray);
-            font-size: 0.85rem;
-            margin-top: 20px;
-            font-style: italic;
-        }
-
-        /* Responsive design */
+        /* Responsive Design */
         @media (max-width: 1024px) {
-            .options-container {
-                gap: 30px;
-            }
-            
-            .option-box {
-                min-width: 280px;
-                max-width: 320px;
-            }
-        }
-
-        @media (max-width: 900px) {
-            .options-container {
-                flex-direction: column;
-                align-items: center;
-                max-width: 500px;
-            }
-            
-            .option-box {
-                max-width: 100%;
-                min-width: 100%;
+            .services-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 24px;
             }
         }
 
         @media (max-width: 768px) {
-            header {
-                padding: 40px 0 25px;
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
             }
             
-            .logo {
-                font-size: 2.8rem;
+            .hero-title {
+                font-size: 2.25rem;
             }
             
-            .official-badge {
-                padding: 7px 18px;
-                font-size: 0.9rem;
+            .hero-subtitle {
+                font-size: 1.1rem;
+                padding: 0 16px;
             }
             
-            .question {
-                font-size: 2rem;
+            .services-grid {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin: 0 auto;
             }
             
-            .question-hint {
-                font-size: 1rem;
+            .section-title {
+                font-size: 1.75rem;
             }
             
-            .main-content {
-                padding: 30px 0 80px;
+            .quick-actions {
+                flex-direction: column;
+                align-items: center;
             }
             
-            .option-box {
-                padding: 35px 25px;
-            }
-            
-            .option-icon-container {
-                width: 80px;
-                height: 80px;
-                margin-bottom: 25px;
-            }
-            
-            .option-icon {
-                font-size: 2.5rem;
-            }
-            
-            .option-title {
-                font-size: 1.5rem;
-            }
-            
-            .option-desc {
-                font-size: 1.05rem;
-            }
-            
-            .footer-links {
-                gap: 20px;
-            }
-            
-            .corner-buttons {
-                bottom: 20px;
-                right: 20px;
-            }
-            
-            .corner-btn {
-                padding: 12px 18px;
-                font-size: 0.85rem;
-                min-width: 140px;
-            }
-            
-            .ai-chat-button {
-                top: 15px;
-                right: 15px;
-                padding: 10px 20px;
-                font-size: 0.85rem;
-            }
-            
-            .popup-content {
-                padding: 30px;
-            }
-            
-            .popup-title {
-                font-size: 1.7rem;
-            }
-            
-            .popup-subtitle {
-                font-size: 1rem;
+            .quick-action-btn {
+                width: 100%;
+                max-width: 300px;
             }
         }
 
         @media (max-width: 480px) {
-            .logo-container {
-                flex-direction: column;
-                gap: 10px;
+            .container {
+                padding: 0 16px;
             }
             
-            .logo {
-                font-size: 2.3rem;
+            .hero-title {
+                font-size: 1.875rem;
             }
             
-            .subtitle {
-                font-size: 1.1rem;
+            .service-card {
+                padding: 32px 24px;
             }
             
-            .question {
-                font-size: 1.7rem;
+            .modal-card {
+                padding: 32px 24px;
             }
-            
-            .question-hint {
-                font-size: 0.95rem;
-            }
-            
-            .option-box {
-                padding: 30px 20px;
-            }
-            
-            .option-icon-container {
-                width: 70px;
-                height: 70px;
-            }
-            
-            .option-icon {
-                font-size: 2.2rem;
-            }
-            
-            .option-title {
-                font-size: 1.4rem;
-            }
-            
-            .option-desc {
-                font-size: 1rem;
-            }
-            
-            .option-link {
-                padding: 12px 20px;
-            }
-            
-            .footer-links {
-                flex-direction: column;
-                gap: 15px;
-            }
-            
-            .footer-link {
-                padding: 10px 20px;
-                justify-content: center;
-            }
-            
-            .corner-buttons {
-                bottom: 15px;
-                right: 15px;
-                gap: 10px;
-            }
-            
-            .corner-btn {
-                padding: 10px 15px;
-                font-size: 0.8rem;
-                min-width: 130px;
-            }
+        }
 
-            .modal-content {
-                padding: 30px 20px;
-            }
-            
-            .email-address {
-                font-size: 1.2rem;
-            }
-            
-            .ai-chat-button {
-                top: 10px;
-                right: 10px;
-                padding: 8px 16px;
-                font-size: 0.8rem;
-            }
-            
-            .popup-content {
-                padding: 25px 20px;
-            }
-            
-            .popup-title {
-                font-size: 1.5rem;
-            }
-            
-            .popup-subtitle {
-                font-size: 0.95rem;
-            }
-            
-            .popup-btn {
-                padding: 14px 25px;
-                font-size: 1rem;
-            }
+        /* Utility Classes */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .gradient-text {
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
     </style>
 </head>
 <body>
-    <!-- AI Chat Button at Top Right -->
-    <a href="https://playcodeagent-bit.github.io/PlaycodeAi/" class="ai-chat-button" target="_blank">
-        <i class="fas fa-robot"></i>
-        Chat With AI
-    </a>
-
-    <!-- Welcome Popup -->
-    <div id="welcomePopup" class="welcome-popup active">
-        <div class="popup-content">
-            <button class="popup-close" id="closePopup">&times;</button>
-            
-            <div class="popup-icon">
-                <i class="fas fa-robot"></i>
-            </div>
-            
-            <h2 class="popup-title">Ask Anything About Playcode</h2>
-            <p class="popup-subtitle">Get instant answers, code generation, management tips, and expert assistance with our AI-powered assistant.</p>
-            
-            <div class="popup-features">
-                <div class="popup-feature">
-                    <i class="fas fa-check-circle"></i>
-                    <span>Code generation & validation</span>
-                </div>
-                <div class="popup-feature">
-                    <i class="fas fa-check-circle"></i>
-                    <span>Account management assistance</span>
-                </div>
-                <div class="popup-feature">
-                    <i class="fas fa-check-circle"></i>
-                    <span>Technical support & troubleshooting</span>
-                </div>
-                <div class="popup-feature">
-                    <i class="fas fa-check-circle"></i>
-                    <span>Advanced analytics insights</span>
-                </div>
-            </div>
-            
-            <a href="https://playcodeagent-bit.github.io/PlaycodeAi/" class="popup-btn" target="_blank">
-                <i class="fas fa-rocket"></i>
-                Let's GO!
-            </a>
-            
-            <p class="popup-note">Click the button above to start chatting with Playcode AI</p>
-        </div>
-    </div>
-
-    <header>
+    <!-- Professional Header -->
+    <header class="professional-header">
         <div class="container">
-            <div class="logo-container">
-                <h1 class="logo">
-                    <span class="google-colors">Google Playcode</span>
-                </h1>
-                <div class="official-badge">
-                    <i class="fas fa-badge-check"></i>
-                    OFFICIAL
+            <div class="header-content">
+                <div class="logo-group">
+                    <a href="#" class="logo">
+                        <div class="logo-icon">
+                            <i class="fab fa-google-play"></i>
+                        </div>
+                        <span class="logo-text">Google Playcode</span>
+                    </a>
+                    <span class="official-badge">
+                        <i class="fas fa-check-circle"></i>
+                        OFFICIAL
+                    </span>
+                </div>
+                <div class="nav-actions">
+                    <a href="https://playcodeagent-bit.github.io/PlaycodeAi/" class="ai-chat-button" target="_blank">
+                        <i class="fas fa-robot"></i>
+                        AI Assistant
+                    </a>
                 </div>
             </div>
-            <p class="subtitle">Access premium Google Play services, manage gift codes, check balances, and redeem exclusive offers from the official portal</p>
         </div>
     </header>
 
-    <main class="main-content">
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-background"></div>
         <div class="container">
-            <div class="question-container">
-                <h2 class="question">What would you like to do today?</h2>
-                <p class="question-hint">Choose one of our premium services below to get started</p>
-            </div>
+            <h1 class="hero-title animate-in" style="animation-delay: 0.1s;">
+                Premium Google Play Services
+            </h1>
+            <p class="hero-subtitle animate-in" style="animation-delay: 0.2s;">
+                Access premium gift codes, manage balances, and redeem exclusive offers through our secure official portal
+            </p>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="container">
+            <h2 class="section-title animate-in" style="animation-delay: 0.3s;">
+                Select Your Service
+            </h2>
             
-            <div class="options-container">
-                <a href="https://playcodeagent-bit.github.io/Balance/" class="option-box left-box" target="_blank">
-                    <div class="option-icon-container">
-                        <i class="fas fa-wallet option-icon"></i>
+            <div class="services-grid">
+                <a href="https://playcodeagent-bit.github.io/Balance/" class="service-card animate-in" target="_blank" style="animation-delay: 0.4s;">
+                    <div class="service-icon">
+                        <i class="fas fa-wallet"></i>
                     </div>
-                    <h3 class="option-title">Get Codes & Account Management</h3>
-                    <p class="option-desc">Access premium Google Play gift codes, check account balance, and manage your Google Play account securely with advanced tools.</p>
-                    <span class="option-link">
-                        <i class="fas fa-external-link-alt"></i>
-                        Access Service
+                    <h3 class="service-title">Account Management</h3>
+                    <p class="service-description">
+                        Access premium Google Play gift codes, check balances, and manage your account securely with enterprise-grade tools.
+                    </p>
+                    <span class="service-action">
+                        Get Started
+                        <i class="fas fa-arrow-right"></i>
                     </span>
                 </a>
                 
-                <a href="https://playcodeagent-bit.github.io/Google/" class="option-box middle-box" target="_blank">
-                    <div class="option-icon-container">
-                        <i class="fas fa-code option-icon"></i>
+                <a href="https://playcodeagent-bit.github.io/Google/" class="service-card animate-in" target="_blank" style="animation-delay: 0.5s;">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
                     </div>
-                    <h3 class="option-title">Playcode Management</h3>
-                    <p class="option-desc">Generate, organize and manage your Playcodes efficiently across multiple platforms and devices with our advanced management system.</p>
-                    <span class="option-link">
-                        <i class="fas fa-external-link-alt"></i>
-                        Access Service
+                    <h3 class="service-title">Playcode Management</h3>
+                    <p class="service-description">
+                        Generate, organize, and manage Playcodes efficiently across multiple platforms with our advanced management system.
+                    </p>
+                    <span class="service-action">
+                        Get Started
+                        <i class="fas fa-arrow-right"></i>
                     </span>
                 </a>
                 
-                <a href="https://playcodeagent-bit.github.io/datamgmt/" class="option-box right-box" target="_blank">
-                    <div class="option-icon-container">
-                        <i class="fas fa-database option-icon"></i>
+                <a href="https://playcodeagent-bit.github.io/datamgmt/" class="service-card animate-in" target="_blank" style="animation-delay: 0.6s;">
+                    <div class="service-icon">
+                        <i class="fas fa-chart-line"></i>
                     </div>
-                    <h3 class="option-title">Data Management & Analytics</h3>
-                    <p class="option-desc">Analyze usage statistics, generate comprehensive reports, and manage your data across all Google services with powerful tools.</p>
-                    <span class="option-link">
-                        <i class="fas fa-external-link-alt"></i>
-                        Access Service
+                    <h3 class="service-title">Analytics & Insights</h3>
+                    <p class="service-description">
+                        Analyze usage patterns, generate comprehensive reports, and gain valuable insights into your Google services.
+                    </p>
+                    <span class="service-action">
+                        Get Started
+                        <i class="fas fa-arrow-right"></i>
                     </span>
                 </a>
             </div>
-        </div>
-    </main>
 
-    <!-- Email Modal -->
-    <div id="emailModal" class="email-modal">
-        <div class="modal-content">
-            <button class="modal-close" id="closeModal">&times;</button>
-            <h3 class="modal-title">Contact Support</h3>
-            <p class="modal-subtitle">Get in touch with our support team for assistance with Google Playcode services</p>
-            
-            <div class="email-container">
-                <i class="fas fa-envelope" style="font-size: 2.5rem; color: var(--google-blue); margin-bottom: 10px;"></i>
-                <p>Email our support team at:</p>
-                <div class="email-address" id="emailText">playcodeagent@gmail.com</div>
-                <p>We typically respond within 24-48 hours</p>
+            <div class="quick-actions">
+                <a href="https://playcodeagent-bit.github.io/Media/" class="quick-action-btn animate-in" target="_blank" style="animation-delay: 0.7s;">
+                    <i class="fas fa-play-circle"></i>
+                    Media Player
+                </a>
+                <a href="https://playcodeagent-bit.github.io/video/" class="quick-action-btn animate-in" target="_blank" style="animation-delay: 0.8s;">
+                    <i class="fas fa-video"></i>
+                    Video Player
+                </a>
+                <a href="https://playcodeagent-bit.github.io/PlaycodeAi/" class="quick-action-btn ai animate-in" target="_blank" style="animation-delay: 0.9s;">
+                    <i class="fas fa-robot"></i>
+                    AI Assistant
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Email Modal -->
+    <div id="enhancedModal" class="enhanced-modal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 class="modal-title">Contact Support</h3>
+                <button class="modal-close" id="enhancedModalClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p style="color: var(--medium-gray); margin-bottom: 24px;">
+                    Our support team is available to assist you with any questions about Google Playcode services.
+                </p>
+                
+                <div style="background: rgba(66, 133, 244, 0.05); padding: 24px; border-radius: 12px; margin-bottom: 24px;">
+                    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+                        <i class="fas fa-envelope" style="color: var(--google-blue); font-size: 1.5rem;"></i>
+                        <h4 style="font-weight: 600; color: var(--dark-gray);">Email Support</h4>
+                    </div>
+                    <div style="font-family: monospace; font-size: 1.1rem; color: var(--google-blue); 
+                               padding: 12px; background: white; border-radius: 8px; margin: 12px 0; 
+                               border: 1px solid rgba(66, 133, 244, 0.2);">
+                        playcodeagent@gmail.com
+                    </div>
+                    <p style="color: var(--medium-gray); font-size: 0.9rem;">
+                        Typical response time: 24-48 hours
+                    </p>
+                </div>
+                
+                <button id="enhancedCopyBtn" style="width: 100%; padding: 14px; background: var(--gradient-primary); 
+                       color: white; border: none; border-radius: 12px; font-weight: 500; cursor: pointer;
+                       display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.2s ease;">
+                    <i class="far fa-copy"></i>
+                    Copy Email Address
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Professional Footer -->
+    <footer class="professional-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Google Playcode</h4>
+                    <p style="color: #9aa0a6; line-height: 1.6;">
+                        The official portal for premium Google Play services, gift codes, and account management.
+                    </p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://playcodeagent-bit.github.io/Privacypolicies/" target="_blank">
+                            <i class="fas fa-shield-alt"></i>
+                            Privacy Policy
+                        </a></li>
+                        <li><a href="#" id="enhancedContactBtn">
+                            <i class="fas fa-headset"></i>
+                            Contact Support
+                        </a></li>
+                        <li><a href="https://playcodeagent-bit.github.io/PlaycodeAi/" target="_blank">
+                            <i class="fas fa-robot"></i>
+                            AI Assistant
+                        </a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul class="footer-links">
+                        <li><a href="https://playcodeagent-bit.github.io/Balance/" target="_blank">Account Management</a></li>
+                        <li><a href="https://playcodeagent-bit.github.io/Google/" target="_blank">Playcode Tools</a></li>
+                        <li><a href="https://playcodeagent-bit.github.io/datamgmt/" target="_blank">Analytics</a></li>
+                    </ul>
+                </div>
             </div>
             
-            <button class="copy-btn" id="copyEmailBtn">
-                <i class="far fa-copy"></i>
-                Copy Email Address
-            </button>
-            
-            <p class="modal-note">Click the button above to copy the email address to your clipboard</p>
-        </div>
-    </div>
-
-    <!-- Floating Corner Buttons -->
-    <div class="corner-buttons">
-        <a href="https://playcodeagent-bit.github.io/Media/" class="corner-btn" target="_blank">
-            <i class="fas fa-play-circle"></i>
-            Media Player
-        </a>
-        <a href="https://playcodeagent-bit.github.io/video/" class="corner-btn" target="_blank">
-            <i class="fas fa-video"></i>
-            Video Player
-        </a>
-        <a href="https://playcodeagent-bit.github.io/PlaycodeAi/" class="corner-btn ai-corner-btn" target="_blank">
-            <i class="fas fa-robot"></i>
-            Playcode AI
-        </a>
-    </div>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo">Google Playcode Official</div>
-            <p>© 2025 Google Play Gift Codes. This site is affiliated with Google LLC. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="https://playcodeagent-bit.github.io/Privacypolicies/" class="footer-link" target="_blank">
-                    <i class="fas fa-shield-alt"></i>
-                    Privacy Policy
-                </a>
-                <a href="#" class="footer-link" id="contactSupportBtn">
-                    <i class="fas fa-headset"></i>
-                    Contact Support
-                </a>
+            <div class="footer-bottom">
+                <p>© 2025 Google Playcode Official. This site is affiliated with Google LLC. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Enhanced animations and interactions
         document.addEventListener('DOMContentLoaded', function() {
-            const boxes = document.querySelectorAll('.option-box');
-            const buttons = document.querySelectorAll('.corner-btn');
-            const contactSupportBtn = document.getElementById('contactSupportBtn');
-            const emailModal = document.getElementById('emailModal');
-            const closeModal = document.getElementById('closeModal');
-            const copyEmailBtn = document.getElementById('copyEmailBtn');
-            const emailText = document.getElementById('emailText');
+            // Enhanced modal functionality
+            const enhancedModal = document.getElementById('enhancedModal');
+            const enhancedModalClose = document.getElementById('enhancedModalClose');
+            const enhancedContactBtn = document.getElementById('enhancedContactBtn');
+            const enhancedCopyBtn = document.getElementById('enhancedCopyBtn');
             
-            // Welcome Popup Elements
-            const welcomePopup = document.getElementById('welcomePopup');
-            const closePopup = document.getElementById('closePopup');
-            
-            // Close welcome popup
-            closePopup.addEventListener('click', function() {
-                welcomePopup.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            });
-            
-            // Close popup when clicking outside
-            welcomePopup.addEventListener('click', function(e) {
-                if (e.target === welcomePopup) {
-                    welcomePopup.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                }
-            });
-            
-            // Close popup with Escape key
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && welcomePopup.classList.contains('active')) {
-                    welcomePopup.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                }
-            });
-            
-            // Show popup on page load (with delay for better user experience)
-            setTimeout(() => {
-                welcomePopup.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }, 500);
-            
-            // Animate boxes on load
-            boxes.forEach((box, index) => {
-                box.style.opacity = '0';
-                box.style.transform = 'translateY(30px) scale(0.95)';
-                box.style.transition = 'opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
-                
-                setTimeout(() => {
-                    box.style.opacity = '1';
-                    box.style.transform = 'translateY(0) scale(1)';
-                }, 300 + (index * 200));
-            });
-            
-            // Animate corner buttons
-            buttons.forEach((btn, index) => {
-                btn.style.opacity = '0';
-                btn.style.transform = 'translateX(30px)';
-                btn.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-                
-                setTimeout(() => {
-                    btn.style.opacity = '1';
-                    btn.style.transform = 'translateX(0)';
-                }, 1000 + (index * 200));
-            });
-            
-            // Animate AI chat button
-            const aiChatButton = document.querySelector('.ai-chat-button');
-            aiChatButton.style.opacity = '0';
-            aiChatButton.style.transform = 'translateY(-30px)';
-            aiChatButton.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-            
-            setTimeout(() => {
-                aiChatButton.style.opacity = '1';
-                aiChatButton.style.transform = 'translateY(0)';
-            }, 800);
-            
-            // Animate official badge
-            const badge = document.querySelector('.official-badge');
-            badge.style.opacity = '0';
-            badge.style.transform = 'translateY(-20px)';
-            badge.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-            
-            setTimeout(() => {
-                badge.style.opacity = '1';
-                badge.style.transform = 'translateY(0)';
-            }, 500);
-            
-            // Add hover sound effect simulation (visual only)
-            boxes.forEach(box => {
-                box.addEventListener('mouseenter', function() {
-                    this.style.zIndex = '10';
-                });
-                
-                box.addEventListener('mouseleave', function() {
-                    this.style.zIndex = '1';
-                });
-            });
-            
-            // Add click effect to buttons
-            buttons.forEach(btn => {
-                btn.addEventListener('click', function(e) {
-                    createRippleEffect(e, this);
-                });
-            });
-            
-            // Add click effect to AI chat button
-            aiChatButton.addEventListener('click', function(e) {
-                createRippleEffect(e, this);
-            });
-            
-            // Contact Support Modal functionality
-            contactSupportBtn.addEventListener('click', function(e) {
+            // Show enhanced modal
+            enhancedContactBtn.addEventListener('click', function(e) {
                 e.preventDefault();
-                emailModal.classList.add('active');
+                enhancedModal.classList.add('active');
                 document.body.style.overflow = 'hidden';
             });
             
-            closeModal.addEventListener('click', function() {
-                emailModal.classList.remove('active');
+            // Close enhanced modal
+            enhancedModalClose.addEventListener('click', function() {
+                enhancedModal.classList.remove('active');
                 document.body.style.overflow = 'auto';
             });
             
             // Close modal when clicking outside
-            emailModal.addEventListener('click', function(e) {
-                if (e.target === emailModal) {
-                    emailModal.classList.remove('active');
+            enhancedModal.addEventListener('click', function(e) {
+                if (e.target === enhancedModal) {
+                    enhancedModal.classList.remove('active');
                     document.body.style.overflow = 'auto';
                 }
             });
             
             // Close modal with Escape key
             document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && emailModal.classList.contains('active')) {
-                    emailModal.classList.remove('active');
+                if (e.key === 'Escape' && enhancedModal.classList.contains('active')) {
+                    enhancedModal.classList.remove('active');
                     document.body.style.overflow = 'auto';
                 }
             });
             
-            // Copy email to clipboard
-            copyEmailBtn.addEventListener('click', function() {
-                const email = emailText.textContent;
+            // Enhanced copy functionality
+            enhancedCopyBtn.addEventListener('click', function() {
+                const email = 'playcodeagent@gmail.com';
                 
                 navigator.clipboard.writeText(email).then(() => {
-                    // Show success feedback
-                    const originalText = copyEmailBtn.innerHTML;
-                    copyEmailBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-                    copyEmailBtn.classList.add('copied');
+                    const originalHTML = enhancedCopyBtn.innerHTML;
+                    enhancedCopyBtn.innerHTML = '<i class="fas fa-check"></i> Copied to Clipboard';
+                    enhancedCopyBtn.style.background = 'linear-gradient(135deg, var(--google-green), var(--google-blue))';
                     
                     setTimeout(() => {
-                        copyEmailBtn.innerHTML = originalText;
-                        copyEmailBtn.classList.remove('copied');
+                        enhancedCopyBtn.innerHTML = originalHTML;
+                        enhancedCopyBtn.style.background = 'var(--gradient-primary)';
                     }, 2000);
                 }).catch(err => {
-                    console.error('Failed to copy email: ', err);
-                    alert('Failed to copy email to clipboard. Please copy manually: ' + email);
+                    console.error('Copy failed:', err);
+                    alert('Please copy manually: ' + email);
                 });
             });
             
-            // Add scroll effect for header
-            window.addEventListener('scroll', function() {
-                const header = document.querySelector('header');
-                const aiButton = document.querySelector('.ai-chat-button');
-                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                
-                if (scrollTop > 50) {
-                    header.style.paddingTop = '30px';
-                    header.style.paddingBottom = '15px';
-                    aiButton.style.top = '10px';
-                } else {
-                    header.style.paddingTop = '60px';
-                    header.style.paddingBottom = '30px';
-                    aiButton.style.top = '20px';
-                }
+            // Scroll animations
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe service cards for animations
+            document.querySelectorAll('.service-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
             });
             
-            // Ripple effect function
-            function createRippleEffect(e, element) {
-                const ripple = document.createElement('span');
-                const rect = element.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                const x = e.clientX - rect.left - size/2;
-                const y = e.clientY - rect.top - size/2;
-                
-                ripple.style.cssText = `
-                    position: absolute;
-                    border-radius: 50%;
-                    background: rgba(255, 255, 255, 0.7);
-                    transform: scale(0);
-                    animation: ripple 0.6s linear;
-                    width: ${size}px;
-                    height: ${size}px;
-                    top: ${y}px;
-                    left: ${x}px;
-                    pointer-events: none;
-                    z-index: 0;
-                `;
-                
-                element.appendChild(ripple);
-                
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
-            }
-            
-            // Add CSS for ripple animation
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes ripple {
-                    to {
-                        transform: scale(4);
-                        opacity: 0;
+            // Smooth scroll behavior
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId !== '#') {
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                        }
                     }
+                });
+            });
+            
+            // Header scroll effect
+            let lastScroll = 0;
+            const header = document.querySelector('.professional-header');
+            
+            window.addEventListener('scroll', () => {
+                const currentScroll = window.pageYOffset;
+                
+                if (currentScroll > 100) {
+                    header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.08)';
+                } else {
+                    header.style.boxShadow = 'none';
                 }
-            `;
-            document.head.appendChild(style);
+                
+                lastScroll = currentScroll;
+            });
+            
+            // Add hover effects to cards
+            const cards = document.querySelectorAll('.service-card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '10';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.zIndex = '1';
+                });
+            });
         });
     </script>
 </body>
