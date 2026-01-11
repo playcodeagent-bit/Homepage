@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=0.5">
     <title>Google Playcode Official</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,6 +13,11 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html {
+            overflow-x: hidden;
         }
 
         :root {
@@ -46,6 +51,9 @@
             line-height: 1.6;
             font-weight: 400;
             overflow-x: hidden;
+            touch-action: manipulation;
+            width: 100%;
+            position: relative;
         }
 
         /* ==== ENHANCED VISUAL EFFECTS ==== */
@@ -57,6 +65,7 @@
             height: 100%;
             z-index: -2;
             pointer-events: none;
+            display: none; /* Hide on mobile for performance */
         }
 
         .particle {
@@ -142,6 +151,7 @@
             max-width: 1280px;
             margin: 0 auto;
             padding: 0 24px;
+            width: 100%;
         }
 
         /* ==== ENHANCED HEADER ==== */
@@ -154,18 +164,21 @@
             z-index: 1000;
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
+            width: 100%;
         }
 
         .header-content {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            width: 100%;
         }
 
         .logo-group {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 12px;
+            flex-wrap: wrap;
         }
 
         .logo {
@@ -187,6 +200,7 @@
             font-size: 1.2rem;
             position: relative;
             overflow: hidden;
+            flex-shrink: 0;
         }
 
         .logo-icon::after {
@@ -219,6 +233,7 @@
             background-clip: text;
             color: transparent;
             position: relative;
+            white-space: nowrap;
         }
 
         .official-badge {
@@ -233,6 +248,8 @@
             gap: 6px;
             letter-spacing: 0.5px;
             animation: badgePulse 2s infinite;
+            flex-shrink: 0;
+            white-space: nowrap;
         }
 
         @keyframes badgePulse {
@@ -261,6 +278,7 @@
             box-shadow: 0 4px 15px rgba(66, 133, 244, 0.4);
             position: relative;
             overflow: hidden;
+            flex-shrink: 0;
         }
 
         .ai-chat-button::before {
@@ -285,10 +303,11 @@
 
         /* ==== ENHANCED HERO SECTION ==== */
         .hero-section {
-            padding: 100px 0 80px;
+            padding: 60px 0 40px;
             text-align: center;
             position: relative;
             overflow: hidden;
+            width: 100%;
         }
 
         .hero-background {
@@ -321,9 +340,9 @@
         }
 
         .hero-title {
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             font-weight: 800;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             background: linear-gradient(45deg, var(--google-blue), var(--google-green), var(--google-yellow));
             -webkit-background-clip: text;
             background-clip: text;
@@ -331,6 +350,8 @@
             line-height: 1.2;
             text-shadow: 0 10px 30px rgba(66, 133, 244, 0.15);
             animation: titleGlow 3s infinite alternate;
+            padding: 0 16px;
+            word-break: break-word;
         }
 
         @keyframes titleGlow {
@@ -346,13 +367,14 @@
         }
 
         .hero-subtitle {
-            font-size: 1.25rem;
+            font-size: 1rem;
             color: var(--medium-gray);
             max-width: 700px;
-            margin: 0 auto 40px;
+            margin: 0 auto 30px;
             font-weight: 400;
             position: relative;
             padding: 20px;
+            word-break: break-word;
         }
 
         .hero-subtitle::before {
@@ -368,16 +390,19 @@
 
         /* ==== ENHANCED SERVICES GRID ==== */
         .services-section {
-            padding: 60px 0 120px;
+            padding: 40px 0 80px;
+            width: 100%;
         }
 
         .section-title {
             text-align: center;
-            font-size: 2.5rem;
+            font-size: 2rem;
             font-weight: 700;
-            margin-bottom: 80px;
+            margin-bottom: 60px;
             color: var(--dark-gray);
             position: relative;
+            padding: 0 16px;
+            word-break: break-word;
         }
 
         .section-title::after {
@@ -400,16 +425,20 @@
 
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-            gap: 32px;
-            margin-bottom: 64px;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            margin-bottom: 40px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 0 16px;
         }
 
         .service-card {
             background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(10px);
             border-radius: var(--border-radius);
-            padding: 40px 32px;
+            padding: 30px 20px;
             transition: var(--transition-standard);
             text-decoration: none;
             color: inherit;
@@ -421,6 +450,10 @@
             align-items: center;
             text-align: center;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            cursor: pointer;
+            -webkit-user-select: none;
+            user-select: none;
         }
 
         .service-card::before {
@@ -440,43 +473,49 @@
             transform: scaleX(1);
         }
 
+        .service-card:active {
+            transform: translateY(-2px) scale(0.99);
+        }
+
         .service-card:hover {
-            transform: translateY(-12px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
             border-color: rgba(66, 133, 244, 0.3);
         }
 
         .service-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 20px;
+            width: 70px;
+            height: 70px;
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 24px;
-            font-size: 2rem;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
             position: relative;
             z-index: 1;
             transition: all 0.3s ease;
         }
 
         .service-card:hover .service-icon {
-            transform: scale(1.1) rotate(5deg);
+            transform: scale(1.05);
             filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
         }
 
         .service-title {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 600;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             color: var(--dark-gray);
+            word-break: break-word;
         }
 
         .service-description {
             color: var(--medium-gray);
-            margin-bottom: 24px;
-            font-size: 1rem;
-            line-height: 1.7;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            word-break: break-word;
         }
 
         .service-action {
@@ -485,11 +524,13 @@
             gap: 8px;
             color: var(--google-blue);
             font-weight: 500;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             padding: 8px 16px;
             border-radius: 20px;
             background: rgba(66, 133, 244, 0.08);
             transition: var(--transition-standard);
+            -webkit-user-select: none;
+            user-select: none;
         }
 
         .service-card:hover .service-action {
@@ -549,16 +590,18 @@
             font-size: 1.5rem;
             color: var(--dark-gray);
             cursor: pointer;
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
+            flex-shrink: 0;
+            touch-action: manipulation;
         }
 
-        .mobile-menu-toggle:hover {
-            background: rgba(0, 0, 0, 0.05);
+        .mobile-menu-toggle:active {
+            background: rgba(0, 0, 0, 0.1);
         }
 
         .mobile-nav {
@@ -575,6 +618,9 @@
             transform: translateY(-20px);
             opacity: 0;
             transition: all 0.3s ease;
+            max-height: calc(100vh - 80px);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .mobile-nav.active {
@@ -585,25 +631,33 @@
         .mobile-nav-links {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 12px;
         }
 
         .mobile-nav-link {
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 15px;
+            padding: 16px;
             border-radius: 12px;
             text-decoration: none;
             color: var(--dark-gray);
             transition: all 0.3s ease;
             border: 1px solid transparent;
+            background: rgba(255, 255, 255, 0.8);
+            -webkit-user-select: none;
+            user-select: none;
+            touch-action: manipulation;
+        }
+
+        .mobile-nav-link:active {
+            background: rgba(66, 133, 244, 0.1);
+            transform: translateY(2px);
         }
 
         .mobile-nav-link:hover {
             background: rgba(66, 133, 244, 0.05);
             border-color: rgba(66, 133, 244, 0.2);
-            transform: translateX(5px);
         }
 
         .mobile-nav-link i {
@@ -615,17 +669,19 @@
         /* ==== ENHANCED QUICK ACTIONS ==== */
         .quick-actions {
             display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-top: 48px;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            margin-top: 40px;
+            padding: 0 16px;
         }
 
         .quick-action-btn {
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 12px;
-            padding: 16px 28px;
+            padding: 16px 24px;
             background: var(--surface-color);
             border: 1px solid rgba(0, 0, 0, 0.08);
             border-radius: var(--border-radius);
@@ -633,9 +689,17 @@
             color: var(--dark-gray);
             font-weight: 500;
             transition: var(--transition-standard);
-            min-width: 180px;
+            width: 100%;
+            max-width: 300px;
             position: relative;
             overflow: hidden;
+            -webkit-user-select: none;
+            user-select: none;
+            touch-action: manipulation;
+        }
+
+        .quick-action-btn:active {
+            transform: translateY(2px);
         }
 
         .quick-action-btn::before {
@@ -649,15 +713,14 @@
             transition: left 0.7s;
         }
 
-        .quick-action-btn:hover::before {
+        .quick-action-btn:active::before {
             left: 100%;
         }
 
         .quick-action-btn:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
             border-color: transparent;
-            background: var(--surface-color);
         }
 
         .quick-action-btn.ai {
@@ -667,18 +730,24 @@
             box-shadow: 0 5px 20px rgba(66, 133, 244, 0.4);
         }
 
+        .quick-action-btn.ai:active {
+            transform: translateY(2px);
+            box-shadow: 0 3px 15px rgba(66, 133, 244, 0.4);
+        }
+
         .quick-action-btn.ai:hover {
-            box-shadow: 0 10px 30px rgba(66, 133, 244, 0.6);
+            box-shadow: 0 8px 25px rgba(66, 133, 244, 0.6);
         }
 
         /* ==== ENHANCED FOOTER ==== */
         .professional-footer {
             background: linear-gradient(135deg, var(--dark-gray), #1a1a2e);
             color: #e8eaed;
-            padding: 60px 0 40px;
+            padding: 40px 0 30px;
             margin-top: auto;
             position: relative;
             overflow: hidden;
+            width: 100%;
         }
 
         .professional-footer::before {
@@ -693,15 +762,16 @@
 
         .footer-content {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+            padding: 0 16px;
         }
 
         .footer-section h4 {
             font-size: 1.1rem;
             font-weight: 600;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             color: white;
             position: relative;
             display: inline-block;
@@ -722,13 +792,7 @@
         }
 
         .footer-links li {
-            margin-bottom: 12px;
-            transform: translateX(0);
-            transition: transform 0.3s ease;
-        }
-
-        .footer-links li:hover {
-            transform: translateX(5px);
+            margin-bottom: 10px;
         }
 
         .footer-links a {
@@ -738,6 +802,14 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            padding: 6px 0;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .footer-links a:active {
+            color: white;
+            transform: translateX(5px);
         }
 
         .footer-links a:hover {
@@ -746,10 +818,11 @@
 
         .footer-bottom {
             text-align: center;
-            padding-top: 32px;
+            padding-top: 24px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: #9aa0a6;
             font-size: 0.9rem;
+            padding: 20px 16px 0;
         }
 
         /* ==== ENHANCED MODAL ==== */
@@ -768,6 +841,7 @@
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
+            padding: 16px;
         }
 
         .enhanced-modal.active {
@@ -779,13 +853,16 @@
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(20px);
             border-radius: var(--border-radius);
-            padding: 40px;
+            padding: 30px 20px;
             max-width: 500px;
-            width: 90%;
+            width: 100%;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             transform: translateY(30px) scale(0.95);
             transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             border: 1px solid rgba(255, 255, 255, 0.2);
+            max-height: 90vh;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .enhanced-modal.active .modal-card {
@@ -796,11 +873,11 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .modal-title {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 600;
             color: var(--dark-gray);
         }
@@ -811,13 +888,19 @@
             font-size: 1.5rem;
             color: var(--medium-gray);
             cursor: pointer;
-            width: 36px;
-            height: 36px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.2s ease;
+            touch-action: manipulation;
+        }
+
+        .modal-close:active {
+            background: rgba(0, 0, 0, 0.1);
+            transform: scale(0.95);
         }
 
         .modal-close:hover {
@@ -826,7 +909,76 @@
         }
 
         /* ==== RESPONSIVE DESIGN ==== */
-        @media (max-width: 1024px) {
+        @media (min-width: 768px) {
+            .floating-particles {
+                display: block; /* Show particles only on desktop */
+            }
+            
+            .hero-section {
+                padding: 100px 0 80px;
+            }
+            
+            .hero-title {
+                font-size: 3.5rem;
+                padding: 0;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.25rem;
+            }
+            
+            .services-section {
+                padding: 60px 0 120px;
+            }
+            
+            .services-grid {
+                grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+                gap: 32px;
+                max-width: none;
+                padding: 0;
+            }
+            
+            .service-card {
+                padding: 40px 32px;
+            }
+            
+            .service-icon {
+                width: 80px;
+                height: 80px;
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2.5rem;
+                padding: 0;
+            }
+            
+            .quick-actions {
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: wrap;
+                margin-top: 48px;
+                padding: 0;
+            }
+            
+            .quick-action-btn {
+                min-width: 180px;
+                width: auto;
+                max-width: none;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 40px;
+                padding: 0;
+            }
+            
+            .container {
+                padding: 0 24px;
+            }
+        }
+
+        @media (min-width: 1024px) {
             .services-grid {
                 grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
                 gap: 24px;
@@ -839,7 +991,7 @@
 
         @media (max-width: 768px) {
             .header-content {
-                flex-wrap: wrap;
+                flex-wrap: nowrap;
             }
             
             .mobile-menu-toggle {
@@ -854,37 +1006,26 @@
                 display: block;
             }
             
+            .logo-group {
+                gap: 8px;
+            }
+            
+            .logo-text {
+                font-size: 1.2rem;
+            }
+            
+            .official-badge {
+                padding: 4px 12px;
+                font-size: 0.75rem;
+            }
+            
             .hero-title {
-                font-size: 2.5rem;
-            }
-            
-            .hero-subtitle {
-                font-size: 1.1rem;
-                padding: 0 16px;
-            }
-            
-            .services-grid {
-                grid-template-columns: 1fr;
-                max-width: 500px;
-                margin: 0 auto;
-            }
-            
-            .section-title {
                 font-size: 2rem;
             }
             
-            .quick-actions {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .quick-action-btn {
-                width: 100%;
-                max-width: 300px;
-            }
-            
-            .service-card {
-                padding: 30px 20px;
+            .hero-subtitle {
+                font-size: 1rem;
+                padding: 16px;
             }
         }
 
@@ -894,15 +1035,20 @@
             }
             
             .hero-title {
-                font-size: 2rem;
-            }
-            
-            .modal-card {
-                padding: 30px 20px;
+                font-size: 1.8rem;
             }
             
             .logo-text {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
+            }
+            
+            .official-badge {
+                font-size: 0.7rem;
+                padding: 3px 10px;
+            }
+            
+            .modal-card {
+                padding: 24px 16px;
             }
         }
 
@@ -938,6 +1084,26 @@
         .delay-3 { animation-delay: 0.3s; }
         .delay-4 { animation-delay: 0.4s; }
         .delay-5 { animation-delay: 0.5s; }
+
+        /* Prevent text selection on interactive elements */
+        a, button, .service-card, .mobile-nav-link, .quick-action-btn {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        /* Improve touch targets */
+        @media (max-width: 768px) {
+            button, 
+            a, 
+            .service-card, 
+            .mobile-nav-link, 
+            .quick-action-btn,
+            .ai-chat-button {
+                min-height: 44px;
+                min-width: 44px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -961,12 +1127,12 @@
                     </span>
                 </div>
                 
-                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
                     <i class="fas fa-bars"></i>
                 </button>
                 
                 <div class="nav-actions">
-                    <a href="https://playcodeagent-bit.github.io/PlaycodeAi/" class="ai-chat-button" target="_blank">
+                    <a href="https://playcodeagent-bit.github.io/PlaycodeAi/" class="ai-chat-button" target="_blank" rel="noopener">
                         <i class="fas fa-robot"></i>
                         AI Assistant
                     </a>
@@ -978,19 +1144,19 @@
     <!-- Mobile Navigation -->
     <nav class="mobile-nav" id="mobileNav">
         <div class="mobile-nav-links">
-            <a href="#services" class="mobile-nav-link">
+            <a href="#services" class="mobile-nav-link" data-action="scroll">
                 <i class="fas fa-th-large"></i>
                 <span>Services</span>
             </a>
-            <a href="https://playcodeagent-bit.github.io/Balance/" class="mobile-nav-link" target="_blank">
+            <a href="https://playcodeagent-bit.github.io/Balance/" class="mobile-nav-link" target="_blank" rel="noopener">
                 <i class="fas fa-wallet"></i>
                 <span>Balance</span>
             </a>
-            <a href="https://playcodeagent-bit.github.io/Google/" class="mobile-nav-link" target="_blank">
+            <a href="https://playcodeagent-bit.github.io/Google/" class="mobile-nav-link" target="_blank" rel="noopener">
                 <i class="fas fa-code"></i>
                 <span>Playcode Tools</span>
             </a>
-            <a href="https://playcodeagent-bit.github.io/PlaycodeAi/" class="mobile-nav-link ai-chat-button" target="_blank">
+            <a href="https://playcodeagent-bit.github.io/PlaycodeAi/" class="mobile-nav-link" target="_blank" rel="noopener">
                 <i class="fas fa-robot"></i>
                 <span>AI Assistant</span>
             </a>
@@ -1022,7 +1188,7 @@
             </h2>
             
             <div class="services-grid">
-                <a href="https://playcodeagent-bit.github.io/Balance/" class="service-card fade-in delay-4" target="_blank">
+                <a href="https://playcodeagent-bit.github.io/Balance/" class="service-card fade-in delay-4" target="_blank" rel="noopener">
                     <div class="service-icon">
                         <i class="fas fa-wallet"></i>
                     </div>
@@ -1036,7 +1202,7 @@
                     </span>
                 </a>
                 
-                <a href="https://playcodeagent-bit.github.io/Google/" class="service-card fade-in delay-5" target="_blank">
+                <a href="https://playcodeagent-bit.github.io/Google/" class="service-card fade-in delay-5" target="_blank" rel="noopener">
                     <div class="service-icon">
                         <i class="fas fa-code"></i>
                     </div>
@@ -1050,7 +1216,7 @@
                     </span>
                 </a>
                 
-                <a href="https://playcodeagent-bit.github.io/datamgmt/" class="service-card fade-in delay-5" target="_blank">
+                <a href="https://playcodeagent-bit.github.io/datamgmt/" class="service-card fade-in delay-5" target="_blank" rel="noopener">
                     <div class="service-icon">
                         <i class="fas fa-chart-line"></i>
                     </div>
@@ -1066,15 +1232,15 @@
             </div>
 
             <div class="quick-actions">
-                <a href="https://playcodeagent-bit.github.io/Media/" class="quick-action-btn fade-in" style="animation-delay: 0.6s;" target="_blank">
+                <a href="https://playcodeagent-bit.github.io/Media/" class="quick-action-btn fade-in" style="animation-delay: 0.6s;" target="_blank" rel="noopener">
                     <i class="fas fa-play-circle"></i>
                     Media Player
                 </a>
-                <a href="https://playcodeagent-bit.github.io/video/" class="quick-action-btn fade-in" style="animation-delay: 0.7s;" target="_blank">
+                <a href="https://playcodeagent-bit.github.io/video/" class="quick-action-btn fade-in" style="animation-delay: 0.7s;" target="_blank" rel="noopener">
                     <i class="fas fa-video"></i>
                     Video Player
                 </a>
-                <a href="https://playcodeagent-bit.github.io/PlaycodeAi/" class="quick-action-btn ai fade-in" style="animation-delay: 0.8s;" target="_blank">
+                <a href="https://playcodeagent-bit.github.io/PlaycodeAi/" class="quick-action-btn ai fade-in" style="animation-delay: 0.8s;" target="_blank" rel="noopener">
                     <i class="fas fa-robot"></i>
                     AI Assistant
                 </a>
@@ -1087,7 +1253,7 @@
         <div class="modal-card">
             <div class="modal-header">
                 <h3 class="modal-title">Contact Support</h3>
-                <button class="modal-close" id="enhancedModalClose">
+                <button class="modal-close" id="enhancedModalClose" aria-label="Close modal">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
@@ -1096,14 +1262,14 @@
                     Our support team is available to assist you with any questions about Google Playcode services.
                 </p>
                 
-                <div style="background: rgba(66, 133, 244, 0.05); padding: 24px; border-radius: 12px; margin-bottom: 24px; border: 1px solid rgba(66, 133, 244, 0.1);">
+                <div style="background: rgba(66, 133, 244, 0.05); padding: 20px; border-radius: 12px; margin-bottom: 24px; border: 1px solid rgba(66, 133, 244, 0.1);">
                     <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-                        <i class="fas fa-envelope" style="color: var(--google-blue); font-size: 1.5rem;"></i>
+                        <i class="fas fa-envelope" style="color: var(--google-blue); font-size: 1.3rem;"></i>
                         <h4 style="font-weight: 600; color: var(--dark-gray);">Email Support</h4>
                     </div>
-                    <div style="font-family: monospace; font-size: 1.1rem; color: var(--google-blue); 
+                    <div style="font-family: monospace; font-size: 1rem; color: var(--google-blue); 
                                padding: 12px; background: rgba(255, 255, 255, 0.8); border-radius: 8px; margin: 12px 0; 
-                               border: 1px solid rgba(66, 133, 244, 0.2); backdrop-filter: blur(5px);">
+                               border: 1px solid rgba(66, 133, 244, 0.2); backdrop-filter: blur(5px); word-break: break-all;">
                         playcodeagent@gmail.com
                     </div>
                     <p style="color: var(--medium-gray); font-size: 0.9rem;">
@@ -1113,7 +1279,7 @@
                 
                 <button id="enhancedCopyBtn" style="width: 100%; padding: 14px; background: var(--gradient-primary); 
                        color: white; border: none; border-radius: 12px; font-weight: 500; cursor: pointer;
-                       display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.2s ease;">
+                       display: flex; align-items: center; justify-content: center; gap: 10px; transition: all 0.2s ease; touch-action: manipulation;">
                     <i class="far fa-copy"></i>
                     Copy Email Address
                 </button>
@@ -1135,7 +1301,7 @@
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <ul class="footer-links">
-                        <li><a href="https://playcodeagent-bit.github.io/Privacypolicies/" target="_blank">
+                        <li><a href="https://playcodeagent-bit.github.io/Privacypolicies/" target="_blank" rel="noopener">
                             <i class="fas fa-shield-alt"></i>
                             Privacy Policy
                         </a></li>
@@ -1143,7 +1309,7 @@
                             <i class="fas fa-headset"></i>
                             Contact Support
                         </a></li>
-                        <li><a href="https://playcodeagent-bit.github.io/PlaycodeAi/" target="_blank">
+                        <li><a href="https://playcodeagent-bit.github.io/PlaycodeAi/" target="_blank" rel="noopener">
                             <i class="fas fa-robot"></i>
                             AI Assistant
                         </a></li>
@@ -1153,9 +1319,9 @@
                 <div class="footer-section">
                     <h4>Services</h4>
                     <ul class="footer-links">
-                        <li><a href="https://playcodeagent-bit.github.io/Balance/" target="_blank">Account Management</a></li>
-                        <li><a href="https://playcodeagent-bit.github.io/Google/" target="_blank">Playcode Tools</a></li>
-                        <li><a href="https://playcodeagent-bit.github.io/datamgmt/" target="_blank">Analytics</a></li>
+                        <li><a href="https://playcodeagent-bit.github.io/Balance/" target="_blank" rel="noopener">Account Management</a></li>
+                        <li><a href="https://playcodeagent-bit.github.io/Google/" target="_blank" rel="noopener">Playcode Tools</a></li>
+                        <li><a href="https://playcodeagent-bit.github.io/datamgmt/" target="_blank" rel="noopener">Analytics</a></li>
                     </ul>
                 </div>
             </div>
@@ -1169,44 +1335,88 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Create floating particles
-            const particlesContainer = document.getElementById('particles');
-            for (let i = 0; i < 30; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                
-                const size = Math.random() * 80 + 20;
-                const posX = Math.random() * 100;
-                const posY = Math.random() * 100;
-                const delay = Math.random() * 5;
-                const duration = Math.random() * 10 + 10;
-                
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.left = `${posX}%`;
-                particle.style.top = `${posY}%`;
-                particle.style.animationDelay = `${delay}s`;
-                particle.style.animationDuration = `${duration}s`;
-                
-                particlesContainer.appendChild(particle);
+            // Create floating particles only on desktop
+            if (window.innerWidth >= 768) {
+                const particlesContainer = document.getElementById('particles');
+                for (let i = 0; i < 30; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    
+                    const size = Math.random() * 80 + 20;
+                    const posX = Math.random() * 100;
+                    const posY = Math.random() * 100;
+                    const delay = Math.random() * 5;
+                    const duration = Math.random() * 10 + 10;
+                    
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    particle.style.left = `${posX}%`;
+                    particle.style.top = `${posY}%`;
+                    particle.style.animationDelay = `${delay}s`;
+                    particle.style.animationDuration = `${duration}s`;
+                    
+                    particlesContainer.appendChild(particle);
+                }
             }
             
-            // Mobile menu toggle
+            // Mobile menu toggle with better touch handling
             const mobileMenuToggle = document.getElementById('mobileMenuToggle');
             const mobileNav = document.getElementById('mobileNav');
             
-            mobileMenuToggle.addEventListener('click', function() {
+            let isMenuOpen = false;
+            
+            mobileMenuToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                isMenuOpen = !isMenuOpen;
                 mobileNav.classList.toggle('active');
-                mobileMenuToggle.innerHTML = mobileNav.classList.contains('active') 
+                mobileMenuToggle.innerHTML = isMenuOpen 
                     ? '<i class="fas fa-times"></i>' 
                     : '<i class="fas fa-bars"></i>';
+                
+                // Prevent body scroll when menu is open
+                document.body.style.overflow = isMenuOpen ? 'hidden' : 'auto';
+            });
+            
+            // Close mobile menu when clicking on a link
+            document.querySelectorAll('.mobile-nav-link[data-action="scroll"]').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId && targetId !== '#') {
+                        const targetElement = document.querySelector(targetId);
+                        if (targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 80,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
+                    
+                    // Close menu
+                    isMenuOpen = false;
+                    mobileNav.classList.remove('active');
+                    mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    document.body.style.overflow = 'auto';
+                });
             });
             
             // Close mobile menu when clicking outside
             document.addEventListener('click', function(e) {
-                if (!mobileNav.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                if (isMenuOpen && !mobileNav.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                    isMenuOpen = false;
                     mobileNav.classList.remove('active');
                     mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Close mobile menu with Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && isMenuOpen) {
+                    isMenuOpen = false;
+                    mobileNav.classList.remove('active');
+                    mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                    document.body.style.overflow = 'auto';
                 }
             });
             
@@ -1228,8 +1438,13 @@
                 e.preventDefault();
                 enhancedModal.classList.add('active');
                 document.body.style.overflow = 'hidden';
-                mobileNav.classList.remove('active');
-                mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                
+                // Close mobile menu if open
+                if (isMenuOpen) {
+                    isMenuOpen = false;
+                    mobileNav.classList.remove('active');
+                    mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                }
             });
             
             // Close enhanced modal
@@ -1269,14 +1484,28 @@
                     }, 2000);
                 }).catch(err => {
                     console.error('Copy failed:', err);
-                    alert('Please copy manually: ' + email);
+                    // Fallback for older browsers
+                    const textArea = document.createElement('textarea');
+                    textArea.value = email;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    try {
+                        document.execCommand('copy');
+                        enhancedCopyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                        setTimeout(() => {
+                            enhancedCopyBtn.innerHTML = originalHTML;
+                        }, 2000);
+                    } catch (err) {
+                        alert('Please copy manually: ' + email);
+                    }
+                    document.body.removeChild(textArea);
                 });
             });
             
             // Scroll animations
             const observerOptions = {
                 threshold: 0.1,
-                rootMargin: '0px 0px -100px 0px'
+                rootMargin: '0px 0px -50px 0px'
             };
             
             const observer = new IntersectionObserver((entries) => {
@@ -1291,17 +1520,17 @@
             // Observe service cards for animations
             document.querySelectorAll('.service-card').forEach(card => {
                 card.style.opacity = '0';
-                card.style.transform = 'translateY(30px)';
+                card.style.transform = 'translateY(20px)';
                 card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
                 observer.observe(card);
             });
             
-            // Smooth scroll behavior
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            // Smooth scroll behavior for anchor links
+            document.querySelectorAll('a[href^="#"]:not([data-action])').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
                     const targetId = this.getAttribute('href');
-                    if (targetId !== '#') {
+                    if (targetId && targetId !== '#') {
+                        e.preventDefault();
                         const targetElement = document.querySelector(targetId);
                         if (targetElement) {
                             window.scrollTo({
@@ -1365,6 +1594,34 @@
                     document.querySelector('.hero-title').style.textShadow = 
                         '0 10px 30px rgba(66, 133, 244, 0.15), 0 0 20px rgba(52, 168, 83, 0.1)';
                 }
+            });
+            
+            // Prevent accidental clicks on mobile
+            let lastTouchEnd = 0;
+            document.addEventListener('touchend', function (event) {
+                const now = Date.now();
+                if (now - lastTouchEnd <= 300) {
+                    event.preventDefault();
+                }
+                lastTouchEnd = now;
+            }, false);
+            
+            // Improve touch responsiveness
+            document.addEventListener('touchstart', function() {}, {passive: true});
+            
+            // Handle window resize
+            let resizeTimeout;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(function() {
+                    // Close mobile menu on resize to desktop
+                    if (window.innerWidth >= 768 && isMenuOpen) {
+                        isMenuOpen = false;
+                        mobileNav.classList.remove('active');
+                        mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+                        document.body.style.overflow = 'auto';
+                    }
+                }, 250);
             });
         });
     </script>
